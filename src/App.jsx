@@ -322,22 +322,22 @@ function App() {
         }`}
       >
         {" "}
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
           {/* Logo - Klique Software Solutions */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, "#home")}
-            className="flex items-center gap-2 group z-50"
+            className="flex items-center gap-2 group z-50 shrink-0"
           >
             <img
               src={logo}
               alt="Klique Software Solutions"
-              className="h-12 md:h-12 w-auto object-contain scale-270"
+              className="h-14 sm:h-16 md:h-16 w-auto object-contain scale-[1.8] origin-left"
             />
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-2 ml-auto mr-6 px-2 py-1.5 rounded-full  ">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2 ml-auto mr-4 lg:mr-6">
             {navItems.map((item) => (
               <div
                 key={item.name}
@@ -428,7 +428,7 @@ function App() {
           </nav>
 
           {/* Contact Button & Mobile Toggle */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 lg:gap-4 shrink-0">
             {/* CTA Button "Contact Now" */}
             <a
               href="/contact-us"

@@ -28,31 +28,43 @@ function Footer({ onLinkClick }) {
   };
 
   return (
-    <footer className="relative bg-white text-slate-800 overflow-hidden">
-      {/* Subtle background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-50/50 blur-3xl rounded-full" />
+    <footer className="relative bg-[#eeeeee] text-slate-800 overflow-hidden">
+      {" "}
+      {/* =====================================================
+          BACKGROUND DECORATION
+      ===================================================== */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Blue glow */}
+        <div className="absolute -top-40 left-1/3 w-[550px] h-[300px] bg-blue-100/40 blur-3xl rounded-full" />
+
+        {/* Soft gray glow */}
+        <div className="absolute bottom-0 right-0 w-[450px] h-[300px] bg-slate-200/50 blur-3xl rounded-full" />
+
+        {/* Very subtle blue glow */}
+        <div className="absolute top-1/2 -left-40 w-[350px] h-[350px] bg-blue-50/50 blur-3xl rounded-full" />
       </div>
-
-      {/* ================= FOOTER MAIN ================= */}
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1.5fr] gap-12 lg:gap-0">
-
-          {/* ================= BRAND ================= */}
-          <div className="lg:pr-12 lg:border-r border-slate-200">
+      {/* =====================================================
+          MAIN FOOTER
+      ===================================================== */}
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-16 pb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1.5fr] gap-12 lg:gap-10">
+          {/* =================================================
+              BRAND SECTION
+          ================================================= */}
+          <div className="lg:pr-10">
             <a
               href="/"
               onClick={(e) => handleLink(e, "/")}
-              className="inline-flex items-center"
+              className="inline-flex items-center group"
             >
               <img
                 src={kliqueLogo}
                 alt="Klique Software Solutions"
-                className="h-16 w-auto object-contain scale-200"
+                className="h-16 sm:h-[70px] w-auto pl-2 object-contain transition-transform scale-[1.20] duration-300 group-hover:scale-[1.50]"
               />
             </a>
 
-            <p className="mt-5 max-w-xs text-[15px] leading-7 text-slate-500">
+            <p className="mt-5 max-w-sm text-[15px] leading-7 text-slate-500">
               We help businesses turn ideas into powerful digital solutions
               through technology, design and strategy.
             </p>
@@ -61,11 +73,11 @@ function Footer({ onLinkClick }) {
             <div className="flex items-center gap-3 mt-7">
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/klique-software-solutions-pvt-ltd/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="group w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
+                className="group w-11 h-11 rounded-xl border border-slate-200/80 bg-white/80 backdrop-blur-sm flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
               >
                 <span className="text-sm font-bold">in</span>
               </a>
@@ -76,7 +88,7 @@ function Footer({ onLinkClick }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="group w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
+                className="group w-11 h-11 rounded-xl border border-slate-200/80 bg-white/80 backdrop-blur-sm flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
               >
                 <span className="text-base font-bold">f</span>
               </a>
@@ -87,7 +99,7 @@ function Footer({ onLinkClick }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="group w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
+                className="group w-11 h-11 rounded-xl border border-slate-200/80 bg-white/80 backdrop-blur-sm flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
               >
                 <svg
                   width="17"
@@ -111,20 +123,22 @@ function Footer({ onLinkClick }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="X"
-                className="group w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
+                className="group w-11 h-11 rounded-xl border border-slate-200/80 bg-white/80 backdrop-blur-sm flex items-center justify-center text-slate-700 transition-all duration-300 hover:bg-[#0d5fd4] hover:border-[#0d5fd4] hover:text-white hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/20"
               >
                 <span className="text-base font-medium">𝕏</span>
               </a>
             </div>
           </div>
 
-          {/* ================= QUICK LINKS ================= */}
-          <div className="lg:px-10 lg:border-r border-slate-200">
-            <h4 className="text-[17px] font-bold text-slate-900">
+          {/* =================================================
+              QUICK LINKS
+          ================================================= */}
+          <div className="lg:px-6">
+            <h4 className="text-[16px] font-bold tracking-tight text-slate-900">
               Quick Links
             </h4>
 
-            <div className="w-8 h-1 bg-[#0d5fd4] rounded-full mt-3 mb-6" />
+            <div className="w-9 h-1 bg-[#0d5fd4] rounded-full mt-3 mb-6" />
 
             <ul className="space-y-5">
               <li>
@@ -168,13 +182,15 @@ function Footer({ onLinkClick }) {
             </ul>
           </div>
 
-          {/* ================= CAREER ================= */}
-          <div className="lg:px-10 lg:border-r border-slate-200">
-            <h4 className="text-[17px] font-bold text-slate-900">
+          {/* =================================================
+              CAREER
+          ================================================= */}
+          <div className="lg:px-6">
+            <h4 className="text-[16px] font-bold tracking-tight text-slate-900">
               Career
             </h4>
 
-            <div className="w-8 h-1 bg-[#0d5fd4] rounded-full mt-3 mb-6" />
+            <div className="w-9 h-1 bg-[#0d5fd4] rounded-full mt-3 mb-6" />
 
             <ul className="space-y-5">
               <li>
@@ -218,19 +234,20 @@ function Footer({ onLinkClick }) {
             </ul>
           </div>
 
-          {/* ================= CONTACT ================= */}
-          <div className="lg:pl-10">
-            <h4 className="text-[17px] font-bold text-slate-900">
+          {/* =================================================
+              CONTACT INFO
+          ================================================= */}
+          <div className="lg:pl-6">
+            <h4 className="text-[16px] font-bold tracking-tight text-slate-900">
               Contact Info
             </h4>
 
-            <div className="w-8 h-1 bg-[#0d5fd4] rounded-full mt-3 mb-6" />
+            <div className="w-9 h-1 bg-[#0d5fd4] rounded-full mt-3 mb-6" />
 
             <div className="space-y-5">
-
-              {/* Location */}
+              {/* LOCATION */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 shrink-0 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0d5fd4]">
+                <div className="w-12 h-12 shrink-0 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-[#0d5fd4]">
                   <svg
                     width="19"
                     height="19"
@@ -253,9 +270,9 @@ function Footer({ onLinkClick }) {
                 </p>
               </div>
 
-              {/* Email */}
+              {/* EMAIL */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 shrink-0 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0d5fd4]">
+                <div className="w-12 h-12 shrink-0 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-[#0d5fd4]">
                   <svg
                     width="19"
                     height="19"
@@ -279,9 +296,9 @@ function Footer({ onLinkClick }) {
                 </a>
               </div>
 
-              {/* Phone */}
+              {/* PHONE */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 shrink-0 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0d5fd4]">
+                <div className="w-12 h-12 shrink-0 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center text-[#0d5fd4]">
                   <svg
                     width="19"
                     height="19"
@@ -307,13 +324,13 @@ function Footer({ onLinkClick }) {
           </div>
         </div>
       </div>
-
-      {/* ================= FOOTER BOTTOM ================= */}
-      <div className="relative border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6">
+      {/* =====================================================
+          FOOTER BOTTOM
+      ===================================================== */}
+      <div className="relative border-t border-slate-300/90 bg-[#eeeeee]">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-5">
-
-            {/* Copyright */}
+            {/* COPYRIGHT */}
             <p className="text-sm text-slate-500 text-center lg:text-left">
               © {new Date().getFullYear()}{" "}
               <strong className="text-[#0d5fd4] font-semibold">
@@ -322,7 +339,7 @@ function Footer({ onLinkClick }) {
               . All rights reserved.
             </p>
 
-            {/* Language */}
+            {/* LANGUAGE */}
             <div className="flex items-center gap-2 text-sm text-slate-500">
               <svg
                 width="18"
@@ -356,7 +373,7 @@ function Footer({ onLinkClick }) {
               </svg>
             </div>
 
-            {/* Legal Links */}
+            {/* LEGAL LINKS */}
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
               <a
                 href="#"
@@ -386,8 +403,9 @@ function Footer({ onLinkClick }) {
           </div>
         </div>
       </div>
-
-      {/* ================= SCROLL TO TOP ================= */}
+      {/* =====================================================
+          SCROLL TO TOP
+      ===================================================== */}
       {isVisible && (
         <button
           onClick={scrollToTop}
