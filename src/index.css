@@ -12,7 +12,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 
 :root {
-  font-family: Arial, Helvetica, sans-serif ;
+  font-family: Arial, Helvetica, sans-serif;
   background-color: #f4f6fa;
   color: #0b0c10;
   scroll-behavior: smooth;
@@ -1534,9 +1534,6 @@ h6 {
   transition: transform 0.5s ease;
 }
 
-.article-card:hover .article-img-wrap img {
-  transform: scale(1.08);
-}
 
 .category-badge {
   position: absolute;
@@ -1698,25 +1695,26 @@ h6 {
 }
 
 /* ===== Marquee ===== */
+.marquee-wrap,
+.marquee-wrap::before,
+.marquee-wrap::after {
+  content: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  filter: none !important;
+}
+
 .marquee-wrap {
   position: relative;
   z-index: 2;
   width: 100%;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 8%,
-    #000 92%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 8%,
-    #000 92%,
-    transparent
-  );
+
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
 }
 
 .marquee-track {
