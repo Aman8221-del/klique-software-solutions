@@ -94,7 +94,7 @@ function ContactUsPage() {
       setLoading(true);
 
       const response = await axios.post(
-        "https://klique-software-solutions.onrender.com",
+        "https://klique-software-solutions.onrender.com/api/contact",
         {
           name,
           email,
