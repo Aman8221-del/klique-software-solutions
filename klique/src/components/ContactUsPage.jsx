@@ -93,12 +93,15 @@ function ContactUsPage() {
     try {
       setLoading(true);
 
-      const response = await axios.post("http://localhost:5000/api/contact", {
-        name,
-        email,
-        subject: formData.subject.trim(),
-        message: formData.message.trim(),
-      });
+      const response = await axios.post(
+        "https://klique-software-solutions.onrender.com",
+        {
+          name,
+          email,
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+        },
+      );
 
       setSuccess(response.data.message);
       setFormData({
