@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 import salesCloudImg from '../assets/Managed Services/sales-cloud.jpg';
 import serviceCloudImg from '../assets/Managed Services/service-cloud.jpg';
 import fieldServiceImg from '../assets/Managed Services/field-service.jpg';
@@ -49,31 +50,10 @@ function ManagedServices() {
   const [activeIdx, setActiveIdx] = useState(0);
   const activeService = SERVICES_DATA[activeIdx];
 
-  const [servicesVisible, setServicesVisible] = useState(false);
-  const servicesRef = useRef(null);
-
-  useEffect(() => {
-    const servicesObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setServicesVisible(true);
-          servicesObserver.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (servicesRef.current) servicesObserver.observe(servicesRef.current);
-
-    return () => {
-      if (servicesRef.current) servicesObserver.unobserve(servicesRef.current);
-    };
-  }, []);
+  const [servicesRef, servicesVisible] = useRevealOnScroll();
 
   return (
     <section id="services" ref={servicesRef} className="services-section w-full">
-      <div className="services-glow" />
-
       {/* Heading Block */}
       <div className={`heading-block ${servicesVisible ? 'animate-in' : ''}`}>
         <div className="eyebrow">Klique platform</div>
@@ -99,7 +79,7 @@ function ManagedServices() {
             {/* Setting key={activeIdx} automatically triggers remounting and runs panelFade CSS entry keyframe */}
             <div className="panel-content" key={activeIdx}>
               <div className="img-frame">
-                <img src={activeService.img} alt={activeService.title} />
+                <img src={activeService.img} alt={activeService.title} loading="lazy" />
               </div>
               <div className="panel-text">
                 <div className="tag">Klique platform</div>

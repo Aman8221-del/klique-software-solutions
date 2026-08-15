@@ -1,32 +1,15 @@
-import { useEffect } from 'react';
 import service1 from '../assets/salesforce/sevices1.jpg';
 import service2 from '../assets/salesforce/service2.jpg';
+import { usePageReveal } from '../hooks/useRevealOnScroll';
 
 function DataAnalyticsServicePage() {
-  // Scroll reveal trigger
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const revealEls = document.querySelectorAll('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
-    return () => {
-      revealEls.forEach(el => observer.unobserve(el));
-    };
-  }, []);
+  usePageReveal('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
 
   return (
     <div className="service-page-wrapper w-full bg-[#f6f8fb]">
       {/* Banner */}
-      <div 
-        className="page-banner" 
+      <div
+        className="page-banner"
         style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${service1})` }}
       >
         <h1>Data Analytics</h1>
@@ -36,33 +19,33 @@ function DataAnalyticsServicePage() {
         {/* Main content */}
         <div className="main-content">
           <div className="section-eyebrow reveal">Our services</div>
-          <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#0b0c10', marginBottom: '36px' }} className="reveal">Data Analytics</h2>
+          <h2 className="service-section-title reveal">Data Analytics</h2>
 
           {/* Intro row */}
           <div className="intro-row">
             <div className="intro-img-wrap reveal-l">
-              <img src={service2} alt="Data Analytics" />
+              <img src={service2} alt="Data Analytics" loading="lazy" />
             </div>
             <div className="intro-text reveal-r">
-              <p style={{ fontSize: '15px', lineHeight: '1.8', color: '#565a66' }}>
+              <p className="service-lede">
                 Welcome to our website dedicated to Data Analytics! We are dedicated to providing comprehensive and in-depth information about the world of data analysis and how it can help businesses and organizations of all sizes make better decisions and drive success.
               </p>
             </div>
           </div>
 
-          <div className="reveal" style={{ marginTop: '40px' }}>
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>What Is Data Analytics?</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', marginBottom: '30px' }}>
+          <div className="service-block reveal">
+            <h3 className="service-subhead">What Is Data Analytics?</h3>
+            <p className="service-body">
               Data analytics refers to the process of analyzing, cleaning, transforming, and modeling data to discover useful information, draw conclusions, and support decision-making. The goal of data analytics is to provide organizations with actionable insights into their operations and help them make informed decisions that can improve their overall performance and bottom line.
             </p>
           </div>
 
-          <div className="reveal">
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>The Benefits Of Data Analytics</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', marginBottom: '16px' }}>
+          <div className="service-block reveal">
+            <h3 className="service-subhead">The Benefits Of Data Analytics</h3>
+            <p className="service-body" style={{ marginBottom: 'var(--space-4)' }}>
               There are numerous benefits to using data analytics, including:
             </p>
-            <ol style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', paddingLeft: '24px', marginBottom: '40px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <ol className="service-list">
               <li><strong>Improved Decision-Making:</strong> By analyzing data, organizations can gain a deeper understanding of their operations and make better-informed decisions that can improve their overall performance.</li>
               <li><strong>Increased Efficiency:</strong> Data analytics can help organizations identify areas where they can improve their processes and increase efficiency, leading to a reduction in waste and a boost in productivity.</li>
               <li><strong>Improved Customer Satisfaction:</strong> Data analytics can help organizations understand the needs and preferences of their customers, allowing them to tailor their offerings and improve customer satisfaction.</li>
@@ -74,19 +57,19 @@ function DataAnalyticsServicePage() {
           {/* Image pair */}
           <div className="img-pair">
             <div className="img-pair-item reveal-l">
-              <img src={service2} alt="Analytics 1" />
+              <img src={service2} alt="Analytics 1" loading="lazy" />
             </div>
             <div className="img-pair-item reveal-r">
-              <img src={service1} alt="Analytics 2" />
+              <img src={service1} alt="Analytics 2" loading="lazy" />
             </div>
           </div>
 
-          <div className="reveal" style={{ marginTop: '40px' }}>
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Data Analytics Techniques</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', marginBottom: '16px' }}>
+          <div className="service-block reveal">
+            <h3 className="service-subhead">Data Analytics Techniques</h3>
+            <p className="service-body" style={{ marginBottom: 'var(--space-4)' }}>
               There are a wide variety of data analytics techniques that organizations can use to analyze and make sense of their data. Some of the most popular techniques include:
             </p>
-            <ol style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', paddingLeft: '24px', marginBottom: '40px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <ol className="service-list">
               <li><strong>Descriptive Analytics:</strong> This type of analytics focuses on describing and summarizing data to understand its characteristics and patterns.</li>
               <li><strong>Predictive Analytics:</strong> Predictive analytics uses historical data to make predictions about future events or trends.</li>
               <li><strong>Prescriptive Analytics:</strong> Prescriptive analytics combines descriptive and predictive analytics to provide recommendations on how organizations can improve their operations and achieve specific goals.</li>
@@ -94,9 +77,9 @@ function DataAnalyticsServicePage() {
             </ol>
           </div>
 
-          <div className="reveal">
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Conclusion</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280' }}>
+          <div className="service-block reveal">
+            <h3 className="service-subhead">Conclusion</h3>
+            <p className="service-body">
               Data analytics has become increasingly important for businesses and organizations of all sizes, as it provides valuable insights into their operations and helps them make better-informed decisions. We hope this website provides you with a comprehensive understanding of data analytics and how it can benefit your organization.
             </p>
           </div>

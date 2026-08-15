@@ -1,53 +1,26 @@
-import { useState, useEffect, useRef } from 'react';
 import aboutImg1 from '../assets/aboutklique1.jpg';
 import aboutImg2 from '../assets/aboutklique2.jpg';
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 
 function AboutSection({ onLinkClick }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          // Disconnect observer once it becomes visible so it doesn't trigger repeatedly
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.15, // Triggers when 15% of the element is visible in the viewport
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const [sectionRef, isVisible] = useRevealOnScroll();
 
   return (
     <section id="about" ref={sectionRef} className="about-section w-full">
-      <div className="about-glow-a"></div>
-      <div className="about-glow-b"></div>
-
       <div className="about-wrapper">
         {/* Animated Image Stack - Triggered on Scroll */}
         <div className="about-img-stack">
-          <img 
-            className={`about-img-1 ${isVisible ? 'animate-in' : ''}`} 
-            src={aboutImg1} 
-            alt="Klique team" 
+          <img
+            className={`about-img-1 ${isVisible ? 'animate-in' : ''}`}
+            src={aboutImg1}
+            alt="Klique team"
+            loading="lazy"
           />
-          <img 
-            className={`about-img-2 ${isVisible ? 'animate-in' : ''}`} 
-            src={aboutImg2} 
-            alt="Klique office" 
+          <img
+            className={`about-img-2 ${isVisible ? 'animate-in' : ''}`}
+            src={aboutImg2}
+            alt="Klique office"
+            loading="lazy"
           />
           <div className={`about-float-card ${isVisible ? 'animate-in' : ''}`}>
             <div className="icon">✓</div>

@@ -1,36 +1,15 @@
-import { useEffect } from 'react';
 import about1 from '../assets/aboutus/about1.jpg';
 import about2 from '../assets/aboutus/about2.jpg';
 import about3 from '../assets/aboutus/about3.jpg';
+import { usePageReveal } from '../hooks/useRevealOnScroll';
 
 function AboutUsPage() {
-  useEffect(() => {
-    // Scroll to top on mount
-    window.scrollTo(0, 0);
-
-    const revealEls = document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    return () => {
-      revealEls.forEach(el => observer.unobserve(el));
-    };
-  }, []);
+  usePageReveal('.reveal, .reveal-scale, .reveal-left, .reveal-right', { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
   return (
     <div className="w-full">
       {/* Intro Hero Section */}
       <section className="about-hero w-full">
-        <div className="hero-glow" />
         <div className="eyebrow reveal">About Klique</div>
         <h1 className="reveal">
           More than 20+ years, we build <span>IT solutions</span> that matter
@@ -42,7 +21,7 @@ function AboutUsPage() {
         {/* Bento Grid */}
         <div className="bento">
           <div className="bento-main-img reveal-scale">
-            <img src={about1} alt="Klique team" />
+            <img src={about1} alt="Klique team" loading="lazy" />
             <div className="overlay"></div>
             <div className="badge-row">
               <div className="exp-num">20+</div>
@@ -66,7 +45,6 @@ function AboutUsPage() {
 
       {/* Story / Team strip */}
       <section className="story-section w-full">
-        <div className="story-glow" />
         <div className="story-header reveal">
           <div className="eyebrow">Our story</div>
           <h2>What drives Klique forward</h2>
@@ -101,7 +79,7 @@ function AboutUsPage() {
       <section className="vm-section w-full">
         <div className="vm-grid">
           <div className="vm-card reveal-left">
-            <img src={about2} alt="Our vision" />
+            <img src={about2} alt="Our vision" loading="lazy" />
             <div className="vm-card-body">
               <div className="card-eyebrow">Our vision</div>
               <h3>Our future goals</h3>
@@ -110,7 +88,7 @@ function AboutUsPage() {
           </div>
 
           <div className="vm-card reveal-right">
-            <img src={about3} alt="Our mission" />
+            <img src={about3} alt="Our mission" loading="lazy" />
             <div className="vm-card-body">
               <div className="card-eyebrow">Our mission</div>
               <h3>Our mission statement</h3>

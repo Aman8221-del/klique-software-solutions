@@ -1,40 +1,15 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 
 function WhyChooseUs() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const [sectionRef, isVisible] = useRevealOnScroll();
 
   return (
     <section ref={sectionRef} id="why-choose-us" className="why-section w-full">
-      <div className="why-glow" />
-
       <div className="max-w-7xl mx-auto w-full px-6">
         <div className={`why-header-row ${isVisible ? 'animate-in' : ''}`}>
           <div className="why-header-left">
             <div className="why-eyebrow">Why choose us</div>
-            <h2>Why we're awesome software solution company</h2>
+            <h2>Why we're the software partner you're looking for</h2>
           </div>
           <div className="why-header-right">
             Great things cannot be achieved by impulse but through a series of actions executed in the best way.

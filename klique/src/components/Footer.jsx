@@ -28,21 +28,7 @@ function Footer({ onLinkClick }) {
   };
 
   return (
-    <footer className="relative bg-[#eeeeee] text-slate-800 overflow-hidden">
-      {" "}
-      {/* =====================================================
-          BACKGROUND DECORATION
-      ===================================================== */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Blue glow */}
-        <div className="absolute -top-40 left-1/3 w-[550px] h-[300px] bg-blue-100/40 blur-3xl rounded-full" />
-
-        {/* Soft gray glow */}
-        <div className="absolute bottom-0 right-0 w-[450px] h-[300px] bg-slate-200/50 blur-3xl rounded-full" />
-
-        {/* Very subtle blue glow */}
-        <div className="absolute top-1/2 -left-40 w-[350px] h-[350px] bg-blue-50/50 blur-3xl rounded-full" />
-      </div>
+    <footer className="relative bg-[#eeeeee] text-slate-800">
       {/* =====================================================
           MAIN FOOTER
       ===================================================== */}
@@ -60,7 +46,10 @@ function Footer({ onLinkClick }) {
               <img
                 src={kliqueLogo}
                 alt="Klique Software Solutions"
-                className="h-16 sm:h-[70px] w-auto pl-2 object-contain transition-transform scale-[1.20] duration-300 group-hover:scale-[1.50]"
+                width={96}
+                height={96}
+                loading="lazy"
+                className="h-20 sm:h-24 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
               />
             </a>
 
@@ -410,7 +399,7 @@ function Footer({ onLinkClick }) {
         <button
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="fixed bottom-7 right-7 z-50 w-14 h-14 rounded-2xl bg-[#0d5fd4] text-white flex items-center justify-center shadow-xl shadow-blue-500/25 hover:bg-[#004bb5] hover:-translate-y-1 transition-all duration-300"
+          className="fixed bottom-7 left-1/2 -translate-x-1/2 z-50 w-14 h-14 rounded-2xl bg-[#0d5fd4] text-white flex items-center justify-center shadow-xl shadow-blue-500/25 hover:bg-[#004bb5] hover:-translate-y-1 transition-all duration-300"
         >
           <svg
             width="20"

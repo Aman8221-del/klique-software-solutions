@@ -1,31 +1,14 @@
-import { useEffect } from 'react';
 import service1 from '../assets/salesforce/sevices1.jpg';
 import service2 from '../assets/salesforce/service2.jpg';
+import { usePageReveal } from '../hooks/useRevealOnScroll';
 
 function SalesforceServicePage() {
-  // Scroll reveal trigger
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const revealEls = document.querySelectorAll('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
-    return () => {
-      revealEls.forEach(el => observer.unobserve(el));
-    };
-  }, []);
+  usePageReveal('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
 
   return (
     <div className="service-page-wrapper w-full bg-[#f6f8fb]">
-      <div 
-        className="page-banner" 
+      <div
+        className="page-banner"
         style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${service1})` }}
       >
         <h1>Salesforce</h1>
@@ -35,16 +18,16 @@ function SalesforceServicePage() {
         {/* Main content */}
         <div className="main-content">
           <div className="section-eyebrow reveal">Our services</div>
-          <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#0b0c10', marginBottom: '36px' }} className="reveal">Salesforce</h2>
+          <h2 className="service-section-title reveal">Salesforce</h2>
 
           {/* Intro row */}
           <div className="intro-row">
             <div className="intro-img-wrap reveal-l">
-              <img src={service2} alt="Salesforce" />
+              <img src={service2} alt="Salesforce" loading="lazy" />
               <div className="img-label">Salesforce is a cloud-based</div>
             </div>
             <div className="intro-text reveal-r">
-              <p>Salesforce is a cloud-based customer relationship management (CRM) platform that offers a range of tools and applications to help businesses manage their sales, customer service, marketing, and more. Some key features of Salesforce include:</p>
+              <p className="service-lede">Salesforce is a cloud-based customer relationship management (CRM) platform that offers a range of tools and applications to help businesses manage their sales, customer service, marketing, and more. Some key features of Salesforce include:</p>
             </div>
           </div>
 
@@ -113,10 +96,10 @@ function SalesforceServicePage() {
           {/* Image pair */}
           <div className="img-pair">
             <div className="img-pair-item reveal-l">
-              <img src={service2} alt="Team working" />
+              <img src={service2} alt="Team working" loading="lazy" />
             </div>
             <div className="img-pair-item reveal-r">
-              <img src={service1} alt="Office meeting" />
+              <img src={service1} alt="Office meeting" loading="lazy" />
             </div>
           </div>
 

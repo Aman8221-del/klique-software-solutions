@@ -17,9 +17,7 @@ import PDFRemediationPage from "./components/PDFRemediationPage";
 import ContactUsPage from "./components/ContactUsPage";
 import ApplyFormPage from "./components/ApplyFormPage";
 import ServicesPage from "./components/ServicesPage";
-import kliqueLogo from "./assets/kliquelogo.jpg";
-import heroSectionImage from "./assets/heroimage.jpg";
-import HeroSectionImage from "./assets/mainheroimage.png";
+import HeroSectionImage from "./assets/mainheroimage.jpg";
 import logo from "./assets/kliquelogo.png";
 
 function App() {
@@ -147,7 +145,6 @@ function App() {
     } else if (href === "/" || href === "#home") {
       e.preventDefault();
       setCurrentView("home");
-      window.history.history = null; // reset if needed
       window.history.pushState(null, null, "/");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
@@ -390,7 +387,7 @@ function App() {
                 {/* Dropdown Menu for Services */}
                 {item.hasDropdown && (
                   <div
-                    className={`absolute top-full left-1/2 -translate-x-[43%] mt-4 w-[600px] p-4 rounded-2xl bg-white shadow-2xl transition-all duration-300 origin-top z-[999] before:absolute before:-top-6 before:left-0 before:w-full before:h-6 ${
+                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[600px] p-4 rounded-2xl bg-white shadow-2xl transition-all duration-300 origin-top z-[999] before:absolute before:-top-6 before:left-0 before:w-full before:h-6 ${
                       isServicesOpen
                         ? "opacity-100 scale-100 pointer-events-auto visible"
                         : "opacity-0 scale-95 pointer-events-none invisible"
@@ -433,11 +430,9 @@ function App() {
             <a
               href="/contact-us"
               onClick={(e) => handleNavClick(e, "/contact-us")}
-              className="group relative hidden sm:inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-semibold text-white rounded-full bg-gradient-to-br from-[#0d5fd4] to-[#004bb5] hover:shadow-[0_0_20px_rgba(13,95,212,0.4)] transition-all duration-300 active:scale-95"
+              className="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full text-sm font-semibold text-white bg-[#0d5fd4] border border-[#0d5fd4] hover:bg-[#004bb5] hover:border-[#004bb5] transition-colors duration-200 active:scale-95"
             >
-              <span className="relative px-5 py-2.5 rounded-full bg-slate-950 text-white border border-transparent transition-all duration-300 group-hover:bg-white group-hover:text-[#0d5fd4] group-hover:border-[#0d5fd4]">
-                Contact Now
-              </span>
+              Contact Now
             </a>
 
             {/* Mobile Hamburger Button */}
@@ -550,7 +545,7 @@ function App() {
               setMobileMenuOpen(false);
               handleNavClick(e, "/contact-us");
             }}
-            className="w-full text-center py-3.5 px-6 bg-gradient-to-r from-[#0d5fd4] to-[#004bb5] hover:from-[#004bb5] hover:to-[#0d5fd4] text-white font-semibold rounded-xl shadow-lg shadow-blue-500/20 transition-all duration-200"
+            className="w-full text-center py-3.5 px-6 bg-[#0d5fd4] hover:bg-[#004bb5] text-white font-semibold rounded-xl shadow-sm transition-colors duration-200"
           >
             Contact Now
           </a>
@@ -596,7 +591,7 @@ function App() {
                 <img
                   src={HeroSectionImage}
                   alt=""
-                  className="absolute inset-0 w-full h-full  scale-100 blur-[0px]"
+                  className="absolute inset-0 w-full h-full object-cover object-right"
                 />
 
                 {/* Soft overlay - keeps text readable */}

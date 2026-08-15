@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 
 const TESTIMONIALS_DATA = [
   { text: "Klique completely transformed how we manage our sales pipeline. Their Salesforce implementation was smooth and precise.", name: "Ritika Sharma", role: "Operations Head, NexusSync", img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=100&h=100&fit=crop" },
@@ -12,36 +13,18 @@ const TESTIMONIALS_DATA = [
 const MULTIPLIED_DATA = [...TESTIMONIALS_DATA, ...TESTIMONIALS_DATA];
 
 function Testimonials() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const [sectionRef, isVisible] = useRevealOnScroll();
   const trackRef = useRef(null);
   const posRef = useRef(0);
   const pausedRef = useRef(false);
   const requestRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15 }
-    );
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return undefined;
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
     const frame = () => {
       if (trackRef.current) {
         const halfWidth = trackRef.current.scrollWidth / 2;
@@ -96,8 +79,6 @@ function Testimonials() {
 
   return (
     <section ref={sectionRef} id="testimonials" className="testi-section w-full">
-      <div className="testi-glow" />
-
       <div className="max-w-7xl mx-auto w-full">
         <div className={`heading-block ${isVisible ? 'animate-in' : ''}`}>
           <div className="eyebrow">Testimonials</div>
@@ -123,7 +104,7 @@ function Testimonials() {
                 <div className="stars">★★★★★</div>
                 <p className="testi-text">{testi.text}</p>
                 <div className="testi-person">
-                  <img src={testi.img} alt={testi.name} />
+                  <img src={testi.img} alt={testi.name} loading="lazy" />
                   <div>
                     <div className="name">{testi.name}</div>
                     <div className="role">{testi.role}</div>

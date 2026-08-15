@@ -129,7 +129,6 @@ function CareerPage({ onContactClick }) {
       {/* HERO SECTION */}
       <section className="career-hero">
         <div className="career-circuit" />
-        <div className="career-hero-glow" />
         <div className="career-hero-content career-reveal">
           <div className="career-eyebrow">
             <span className="career-dot"></span> We're hiring across teams
@@ -226,8 +225,6 @@ function CareerPage({ onContactClick }) {
 
       {/* WHY JOIN SECTION */}
       <section className="career-section career-section-perks">
-        <div className="career-glow-orb career-glow-left" />
-        <div className="career-glow-orb career-glow-right" />
         <div className="career-section-head career-reveal">
           <span className="career-kicker">Why Klique</span>
           <h2>A team that ships, learns and grows together</h2>
@@ -320,7 +317,6 @@ function CareerPage({ onContactClick }) {
 
       {/* HIRING PROCESS */}
       <section className="career-process-section">
-        <div className="career-glow-orb career-glow-center" />
         <div className="career-section-head career-reveal">
           <span className="career-kicker">Hiring process</span>
           <h2>Simple, transparent, fast</h2>

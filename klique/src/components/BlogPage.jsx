@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { usePageReveal } from '../hooks/useRevealOnScroll';
 import blog1 from '../assets/blog/blog1.jpg';
 import blog2 from '../assets/blog/blog2.jpg';
 import blog3 from '../assets/blog/blog3.jpg';
@@ -261,26 +262,7 @@ function BlogPage() {
   const [saveDetails, setSaveDetails] = useState(false);
   const [commentSubmitted, setCommentSubmitted] = useState(false);
 
-  useEffect(() => {
-    // Scroll to top on view change
-    window.scrollTo(0, 0);
-
-    const revealEls = document.querySelectorAll('.blog-reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.02, rootMargin: '0px 0px -40px 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
-
-    return () => {
-      revealEls.forEach(el => observer.unobserve(el));
-    };
-  }, [activePost]);
+  usePageReveal('.blog-reveal', { threshold: 0.02, rootMargin: '0px 0px -40px 0px' }, [activePost]);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -302,8 +284,7 @@ function BlogPage() {
 
     return (
       <div className="blog-page w-full">
-        <div className="blog-glow" />
-        <div className="blog-wrap">
+          <div className="blog-wrap">
           
           {/* Breadcrumb Navigation */}
           <div className="blog-reveal">
@@ -484,7 +465,6 @@ function BlogPage() {
 
   return (
     <div className="blog-page w-full">
-      <div className="blog-glow" />
       <div className="blog-wrap">
         
         <div className="blog-top blog-reveal">
@@ -498,7 +478,7 @@ function BlogPage() {
         <div className="blog-layout">
 
           <div className="blog-feature blog-reveal">
-            <img src={blog1} alt="Customer Data Platform" />
+            <img src={blog1} alt="Customer Data Platform" loading="lazy" />
             <div className="blog-feature-content">
               <span className="blog-feature-tag">Salesforce · Featured</span>
               <h3>Customer Data Platform (formerly Salesforce CDP)</h3>
@@ -519,7 +499,7 @@ function BlogPage() {
 
             <div className="blog-row-card blog-reveal" style={{ animationDelay: '0.1s' }}>
               <div className="blog-row-thumb">
-                <img src={blog2} alt="Einstein" />
+                <img src={blog2} alt="Einstein" loading="lazy" />
               </div>
               <div className="blog-row-body">
                 <div className="blog-row-meta">Einstein</div>
@@ -539,7 +519,7 @@ function BlogPage() {
 
             <div className="blog-row-card blog-reveal" style={{ animationDelay: '0.2s' }}>
               <div className="blog-row-thumb">
-                <img src={blog3} alt="Commerce" />
+                <img src={blog3} alt="Commerce" loading="lazy" />
               </div>
               <div className="blog-row-body">
                 <div className="blog-row-meta">Commerce</div>
@@ -559,7 +539,7 @@ function BlogPage() {
 
             <div className="blog-row-card blog-reveal" style={{ animationDelay: '0.3s' }}>
               <div className="blog-row-thumb">
-                <img src={blog4} alt="Development" />
+                <img src={blog4} alt="Development" loading="lazy" />
               </div>
               <div className="blog-row-body">
                 <div className="blog-row-meta">Development</div>

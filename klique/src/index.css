@@ -9,13 +9,91 @@
   scrollbar-width: none;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
-
+/* ==========================================================================
+   Design tokens
+   Colour values are unchanged from the original theme — only the scale,
+   tracking, spacing, elevation and motion system are new.
+   ========================================================================== */
 :root {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f4f6fa;
-  color: #0b0c10;
+  /* Colour */
+  --ink: #0b0c10;
+  --ink-soft: #565a66;
+  --muted: #6b7280;
+  --blue: #0d5fd4;
+  --blue-deep: #004bb5;
+  --blue-pale: rgba(13, 95, 212, 0.08);
+  --blue-line: rgba(13, 95, 212, 0.18);
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --line: rgba(11, 12, 16, 0.08);
+  --white: #ffffff;
+
+  /* Fluid type scale */
+  --text-display: clamp(2.5rem, 2.05rem + 2vw, 3.75rem);
+  --text-h1: clamp(2.25rem, 1.9rem + 1.6vw, 3.25rem);
+  --text-h2: clamp(1.75rem, 1.5rem + 1.1vw, 2.5rem);
+  --text-h3: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-h4: clamp(1.05rem, 1rem + 0.2vw, 1.25rem);
+  --text-body-lg: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  --text-caption: 0.75rem;
+
+  /* Tracking */
+  --tracking-display: -0.03em;
+  --tracking-h2: -0.02em;
+  --tracking-h3: -0.01em;
+
+  /* Spacing (8px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --section-y: clamp(64px, 5vw + 40px, 120px);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  /* Elevation — restrained, not glow-heavy */
+  --shadow-sm: 0 1px 2px rgba(11, 12, 16, 0.06);
+  --shadow-md: 0 4px 16px rgba(11, 12, 16, 0.08);
+  --shadow-lg: 0 12px 32px rgba(11, 12, 16, 0.1);
+  --shadow-brand: 0 8px 20px rgba(13, 95, 212, 0.18);
+
+  /* Motion */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 500ms;
+
+  font-family:
+    "Plus Jakarta Sans",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family:
+    "Plus Jakarta Sans",
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
 h1,
@@ -25,6 +103,41 @@ h4,
 h5,
 h6 {
   font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  letter-spacing: var(--tracking-h3);
+  color: var(--ink);
+}
+
+h1 {
+  letter-spacing: var(--tracking-display);
+}
+
+h2 {
+  letter-spacing: var(--tracking-h2);
+}
+
+/* Respect the user's motion preference site-wide */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Consistent, visible keyboard focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
 /* Custom Scrollbar */
@@ -33,7 +146,7 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f4f6fa;
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -45,204 +158,78 @@ h6 {
   background: #b5bcd3;
 }
 
-/* Ambient Theme Background Layers */
-.zenith-container {
-  overflow: hidden;
+/* ==========================================================================
+   Shared section shell — replaces per-section ambient glow layers with a
+   flat, alternating-ground rhythm.
+   ========================================================================== */
+.section-surface {
+  background: var(--surface);
 }
 
-/* Layer 1: big soft blue glow bottom-right */
-.glow-1 {
-  position: absolute;
-  width: 1400px;
-  height: 1400px;
-  right: -500px;
-  bottom: -700px;
-  background: radial-gradient(
-    circle at center,
-    rgba(13, 95, 212, 0.22) 0%,
-    rgba(13, 95, 212, 0.08) 35%,
-    rgba(244, 246, 250, 0) 70%
-  );
-  border-radius: 50%;
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: 1;
+.section-tint {
+  background: var(--bg);
 }
 
-/* Layer 2: swirl / wave streak using conic + blur */
-.swirl {
-  position: absolute;
-  width: 1200px;
-  height: 1200px;
-  right: -300px;
-  bottom: -600px;
-  background: conic-gradient(
-    from 200deg at 50% 50%,
-    rgba(255, 255, 255, 0) 0deg,
-    rgba(13, 95, 212, 0.18) 40deg,
-    rgba(13, 95, 212, 0.05) 90deg,
-    rgba(255, 255, 255, 0) 140deg,
-    rgba(255, 255, 255, 0) 360deg
-  );
-  filter: blur(60px);
-  border-radius: 50%;
-  animation: rotate 24s linear infinite;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 1;
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-3);
 }
 
-/* Layer 3: thin bright highlight line */
-.highlight {
-  position: absolute;
-  width: 900px;
-  height: 900px;
-  right: -200px;
-  bottom: -500px;
-  border-radius: 50%;
-  background: conic-gradient(
-    from 220deg at 50% 50%,
-    rgba(255, 255, 255, 0) 0deg,
-    rgba(13, 95, 212, 0.25) 25deg,
-    rgba(255, 255, 255, 0) 55deg,
-    rgba(255, 255, 255, 0) 360deg
-  );
-  filter: blur(8px);
-  mix-blend-mode: multiply;
-  animation: rotate 24s linear infinite;
-  pointer-events: none;
-  z-index: 1;
+.heading-block {
+  max-width: 640px;
+  margin-bottom: var(--space-12);
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--duration-slow) var(--ease),
+    transform var(--duration-slow) var(--ease);
 }
 
-/* Left Hero Glow for balance */
-.glow-left {
-  position: absolute;
-  width: 800px;
-  height: 800px;
-  left: -200px;
-  top: -200px;
-  background: radial-gradient(
-    circle at center,
-    rgba(13, 95, 212, 0.08) 0%,
-    rgba(244, 246, 250, 0) 70%
-  );
-  border-radius: 50%;
-  filter: blur(50px);
-  pointer-events: none;
-  z-index: 1;
+.heading-block.animate-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.heading-block h2 {
+  font-size: var(--text-h2);
+  line-height: 1.15;
+  margin-bottom: var(--space-4);
 }
 
-/* Floating animation */
-.animate-float-slow {
-  animation: floatSlow 8s ease-in-out infinite;
+.heading-block p {
+  font-size: var(--text-body-lg);
+  line-height: 1.65;
+  color: var(--ink-soft);
 }
 
-.animate-float-medium {
-  animation: floatMedium 6s ease-in-out infinite;
+/* Reveal-on-scroll primitive, driven by the shared useRevealOnScroll hook */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--duration-slow) var(--ease),
+    transform var(--duration-slow) var(--ease);
 }
 
-@keyframes floatSlow {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-15px) rotate(1deg);
-  }
-}
-
-@keyframes floatMedium {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-/* Grid Overlay - subtle grid */
-.grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(11, 12, 16, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(11, 12, 16, 0.035) 1px, transparent 1px);
-  background-size: 44px 44px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Circuit Line Decoration */
-.circuit {
-  position: absolute;
-  top: 40px;
-  right: 60px;
-  width: 260px;
-  opacity: 0.9;
-  z-index: 2;
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Glassmorphism Classes for Light Theme */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(11, 12, 16, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(11, 12, 16, 0.04);
-}
-
-.glass-panel-hover:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(13, 95, 212, 0.15);
-  box-shadow: 0 10px 30px -10px rgba(13, 95, 212, 0.12);
-  transform: translateY(-2px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Tech circuit dot animation */
-@keyframes tech-pulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-
-  50% {
-    transform: scale(1.4);
-    opacity: 1;
-    filter: drop-shadow(0 0 4px #0d5fd4);
-  }
-}
-
-.tech-dot-pulse {
-  animation: tech-pulse 3s infinite ease-in-out;
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* About Us Section Styles */
 .about-section {
   position: relative;
-  background: #ffffff;
-  padding: 100px 24px;
+  background: var(--surface);
+  padding: var(--section-y) 24px;
   overflow: hidden;
-  border-bottom: 1px solid rgba(11, 12, 16, 0.05);
+  border-bottom: 1px solid var(--line);
 }
 
 .about-glow-a {
@@ -441,11 +428,12 @@ h6 {
 }
 
 .about-title {
-  font-size: 36px;
+  font-size: var(--text-h2);
   font-weight: 700;
-  line-height: 1.3;
-  color: #0b0c10;
-  margin-bottom: 36px;
+  line-height: 1.15;
+  letter-spacing: var(--tracking-h2);
+  color: var(--ink);
+  margin-bottom: var(--space-8);
 }
 
 .about-feature {
@@ -514,19 +502,20 @@ h6 {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #0d5fd4, #004bb5);
-  color: #ffffff;
+  background: var(--blue);
+  color: var(--white);
   padding: 13px 28px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 8px 24px rgba(13, 95, 212, 0.25);
+  box-shadow: var(--shadow-brand);
   opacity: 0;
   transform: translateY(15px);
   transition:
-    transform 0.2s ease,
-    opacity 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s;
+    transform var(--duration-fast) var(--ease),
+    background var(--duration-fast) var(--ease),
+    opacity 1s var(--ease) 0.9s;
 }
 
 .about-text-side.animate-in .about-cta-btn {
@@ -535,8 +524,8 @@ h6 {
 }
 
 .about-text-side.animate-in .about-cta-btn:hover {
+  background: var(--blue-deep);
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(13, 95, 212, 0.35);
 }
 
 @media (max-width: 767px) {
@@ -633,36 +622,28 @@ h6 {
 }
 
 .hero-h1 {
-  font-size: 36px;
+  font-size: var(--text-display);
   font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 22px;
+  line-height: 1.08;
+  letter-spacing: var(--tracking-display);
+  margin-bottom: var(--space-6);
   opacity: 0;
-  animation: fadeUp-anim 0.8s ease forwards 0.15s;
-  color: #0b0c10;
-}
-
-@media (min-width: 768px) {
-  .hero-h1 {
-    font-size: 54px;
-  }
+  animation: fadeUp-anim 0.8s var(--ease) forwards 0.15s;
+  color: var(--ink);
 }
 
 .hero-h1 .grad {
-  color: #0d5fd4;
-  background: linear-gradient(135deg, #0d5fd4, #004bb5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--blue);
 }
 
 .hero-subtext {
-  font-size: 16px;
-  line-height: 1.75;
-  color: #565a66;
+  font-size: var(--text-body-lg);
+  line-height: 1.65;
+  color: var(--ink-soft);
   max-width: 520px;
-  margin-bottom: 36px;
+  margin-bottom: var(--space-8);
   opacity: 0;
-  animation: fadeUp-anim 0.8s ease forwards 0.3s;
+  animation: fadeUp-anim 0.8s var(--ease) forwards 0.3s;
 }
 
 .hero-cta-row {
@@ -675,18 +656,19 @@ h6 {
 }
 
 .hero-btn-primary {
-  background: linear-gradient(135deg, #0d5fd4, #004bb5);
-  color: #ffffff;
+  background: var(--blue);
+  color: var(--white);
   border: none;
   padding: 15px 30px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 8px 26px rgba(13, 95, 212, 0.35);
+  box-shadow: var(--shadow-brand);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease),
+    background var(--duration-fast) var(--ease);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -694,22 +676,24 @@ h6 {
 }
 
 .hero-btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(13, 95, 212, 0.5);
+  background: var(--blue-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(13, 95, 212, 0.28);
 }
 
 .hero-btn-secondary {
-  background: #000000;
-  color: #ffffff;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 14px 30px;
+  border-radius: var(--radius-md);
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    background var(--duration-fast) var(--ease);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -717,9 +701,9 @@ h6 {
 }
 
 .hero-btn-secondary:hover {
-  background: #0b0c10;
-  color: #ffffff;
-  transform: translateY(-3px);
+  background: var(--surface);
+  border-color: var(--ink);
+  transform: translateY(-2px);
 }
 
 .hero-trust-row {
@@ -836,7 +820,7 @@ h6 {
 /* ===== Managed Services Section ===== */
 .services-section {
   position: relative;
-  padding: 75px 60px 100px;
+  padding: var(--section-y) 60px;
   overflow: hidden;
   background:
     repeating-linear-gradient(
@@ -853,8 +837,8 @@ h6 {
       transparent 1px,
       transparent 44px
     ),
-    #f6f8fb;
-  border-bottom: 1px solid rgba(11, 12, 16, 0.05);
+    var(--bg);
+  border-bottom: 1px solid var(--line);
 }
 
 .services-glow {
@@ -872,6 +856,7 @@ h6 {
   position: relative;
   z-index: 2;
   text-align: center;
+  margin-inline: auto;
   margin-bottom: 54px;
   opacity: 0;
   transform: translateY(18px);
@@ -895,9 +880,10 @@ h6 {
 }
 
 .services-section .heading-block h2 {
-  font-size: 34px;
+  font-size: var(--text-h2);
   font-weight: 800;
-  color: #0b0c10;
+  letter-spacing: var(--tracking-h2);
+  color: var(--ink);
 }
 
 /* Animated gradient border frame */
@@ -1138,10 +1124,6 @@ h6 {
     padding: 60px 24px;
   }
 
-  .services-section .heading-block h2 {
-    font-size: 28px;
-  }
-
   .services-grid {
     grid-template-columns: 1fr;
   }
@@ -1207,24 +1189,9 @@ h6 {
 /* ===== Why Choose Us Section ===== */
 .why-section {
   position: relative;
-  padding: 75px 60px 100px;
+  padding: var(--section-y) 60px;
   overflow: hidden;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(11, 12, 16, 0.025) 0px,
-      rgba(11, 12, 16, 0.025) 1px,
-      transparent 1px,
-      transparent 44px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(11, 12, 16, 0.025) 0px,
-      rgba(11, 12, 16, 0.025) 1px,
-      transparent 1px,
-      transparent 44px
-    ),
-    #f6f8fb;
+  background: var(--surface);
   border-bottom: 1px solid rgba(11, 12, 16, 0.05);
 }
 
@@ -1273,10 +1240,11 @@ h6 {
 }
 
 .why-header-left h2 {
-  font-size: 38px;
+  font-size: var(--text-h2);
   font-weight: 800;
-  line-height: 1.25;
-  color: #0b0c10;
+  line-height: 1.15;
+  letter-spacing: var(--tracking-h2);
+  color: var(--ink);
 }
 
 .why-header-right {
@@ -1420,7 +1388,7 @@ h6 {
 /* ===== Latest News Section ===== */
 .news-section {
   position: relative;
-  padding: 75px 60px 100px;
+  padding: var(--section-y) 60px;
   overflow: hidden;
   background:
     repeating-linear-gradient(
@@ -1437,7 +1405,7 @@ h6 {
       transparent 1px,
       transparent 44px
     ),
-    #f6f8fb;
+    var(--bg);
   border-bottom: 1px solid rgba(11, 12, 16, 0.05);
 }
 
@@ -1456,6 +1424,7 @@ h6 {
   position: relative;
   z-index: 2;
   text-align: center;
+  margin-inline: auto;
   margin-bottom: 54px;
   opacity: 0;
   transform: translateY(18px);
@@ -1479,9 +1448,10 @@ h6 {
 }
 
 .news-section .heading-block h2 {
-  font-size: 34px;
+  font-size: var(--text-h2);
   font-weight: 800;
-  color: #0b0c10;
+  letter-spacing: var(--tracking-h2);
+  color: var(--ink);
 }
 
 .articles-grid {
@@ -1613,33 +1583,14 @@ h6 {
   .news-section {
     padding: 60px 20px;
   }
-
-  .news-section .heading-block h2 {
-    font-size: 28px;
-  }
 }
 
 /* ===== Testimonials Section ===== */
 .testi-section {
   position: relative;
-  padding: 100px 0;
+  padding: var(--section-y) 0;
   overflow: hidden;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(11, 12, 16, 0.025) 0px,
-      rgba(11, 12, 16, 0.025) 1px,
-      transparent 1px,
-      transparent 44px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(11, 12, 16, 0.025) 0px,
-      rgba(11, 12, 16, 0.025) 1px,
-      transparent 1px,
-      transparent 44px
-    ),
-    #f6f8fb;
+  background: var(--surface);
   border-bottom: 1px solid rgba(11, 12, 16, 0.05);
 }
 
@@ -1658,6 +1609,7 @@ h6 {
   position: relative;
   z-index: 2;
   text-align: center;
+  margin-inline: auto;
   margin-bottom: 54px;
   padding: 0 60px;
   opacity: 0;
@@ -1682,14 +1634,15 @@ h6 {
 }
 
 .testi-section .heading-block h2 {
-  font-size: 34px;
+  font-size: var(--text-h2);
   font-weight: 800;
-  color: #0b0c10;
+  letter-spacing: var(--tracking-h2);
+  color: var(--ink);
 }
 
 .testi-section .heading-block p {
-  font-size: 14.5px;
-  color: #6b7280;
+  font-size: var(--text-body-lg);
+  color: var(--muted);
   max-width: 480px;
   margin: 12px auto 0;
 }
@@ -1948,11 +1901,12 @@ h6 {
 .about-hero h1 {
   position: relative;
   z-index: 2;
-  font-size: 42px;
+  font-size: var(--text-h1);
   font-weight: 800;
+  letter-spacing: var(--tracking-display);
   max-width: 680px;
   margin: 0 auto 18px;
-  line-height: 1.3;
+  line-height: 1.15;
 }
 
 .about-hero h1 span {
@@ -2152,8 +2106,9 @@ h6 {
 
 .story-header h2 {
   color: #ffffff;
-  font-size: 32px;
+  font-size: var(--text-h2);
   font-weight: 800;
+  letter-spacing: var(--tracking-h2);
 }
 
 .timeline {
@@ -2396,10 +2351,10 @@ h6 {
 }
 
 h2.blog-headline {
-  font-size: 42px;
-  line-height: 1.15;
+  font-size: var(--text-h1);
+  line-height: 1.1;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-display);
   margin: 0;
   max-width: 520px;
   font-family: "Outfit", sans-serif;
@@ -2844,9 +2799,10 @@ h2.blog-headline span {
 }
 
 .blog-detail-title {
-  font-size: 38px;
+  font-size: var(--text-h1);
   font-weight: 800;
-  line-height: 1.25;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.15;
   color: var(--ink);
   margin-bottom: 32px;
   font-family: "Outfit", sans-serif;
@@ -3745,9 +3701,10 @@ h2.blog-headline span {
 }
 
 .career-hero-title {
-  font-size: 52px;
+  font-size: var(--text-display);
   font-weight: 800;
-  line-height: 1.15;
+  letter-spacing: var(--tracking-display);
+  line-height: 1.08;
   margin-bottom: 20px;
   font-family: "Outfit", "Segoe UI", sans-serif;
   opacity: 0;
@@ -4089,10 +4046,11 @@ h2.blog-headline span {
 }
 
 .career-section-head h2 {
-  font-size: 34px;
+  font-size: var(--text-h2);
   font-weight: 800;
+  letter-spacing: var(--tracking-h2);
   margin-bottom: 14px;
-  line-height: 1.3;
+  line-height: 1.15;
   font-family: "Outfit", "Segoe UI", sans-serif;
   color: var(--ink);
 }
@@ -4465,8 +4423,9 @@ h2.blog-headline span {
 }
 
 .career-cta-section h2 {
-  font-size: 30px;
+  font-size: var(--text-h2);
   font-weight: 800;
+  letter-spacing: var(--tracking-h2);
   margin-bottom: 14px;
   position: relative;
   font-family: "Outfit", "Segoe UI", sans-serif;
@@ -4802,8 +4761,9 @@ h2.blog-headline span {
 
 .service-page-wrapper .page-banner h1 {
   color: #fff;
-  font-size: 52px;
+  font-size: var(--text-display);
   font-weight: 700;
+  letter-spacing: var(--tracking-display);
   text-align: center;
   margin: 0;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -5168,18 +5128,72 @@ h2.blog-headline span {
 .service-page-wrapper .card-title {
   position: relative;
   z-index: 2;
-  font-size: 38px;
+  font-size: var(--text-h2);
   font-weight: 900;
   color: #fff;
   line-height: 1.15;
-  letter-spacing: -0.5px;
+  letter-spacing: var(--tracking-h2);
 }
 
 .service-page-wrapper .card-title span {
   display: block;
-  background: linear-gradient(135deg, #fff, #7fb0ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #7fb0ff;
+}
+
+/* Shared body-copy classes — replace the inline style={{...}} blocks that
+   used to be repeated across every service page. */
+.service-page-wrapper .service-section-title {
+  font-size: var(--text-h2);
+  font-weight: 800;
+  letter-spacing: var(--tracking-h2);
+  color: var(--ink);
+  margin-bottom: var(--space-8);
+}
+
+.service-page-wrapper .service-lede {
+  font-size: var(--text-body-lg);
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.service-page-wrapper .service-subhead {
+  color: var(--blue);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.service-page-wrapper .service-body {
+  font-size: var(--text-small);
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.service-page-wrapper .service-body + .service-body,
+.service-page-wrapper .service-list + .service-body {
+  margin-top: var(--space-4);
+}
+
+.service-page-wrapper .service-list {
+  font-size: var(--text-small);
+  line-height: 1.8;
+  color: var(--muted);
+  padding-left: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.service-page-wrapper .service-list.bulleted {
+  list-style-type: disc;
+}
+
+.service-page-wrapper .service-block {
+  margin-top: var(--space-10);
+}
+
+.service-page-wrapper .service-block + .service-block {
+  margin-top: var(--space-6);
 }
 
 /* blue accent line */
@@ -5263,4 +5277,25 @@ h2.blog-headline span {
 
 .blog-detail-item h4::before {
   content: none !important;
+}
+
+/* ==========================================================================
+   Flat-surface pass — ambient decorative glows removed in favour of the
+   flat, alternating section-ground rhythm defined above. Kept as a single
+   override (rather than deleting each definition) so section padding and
+   any future re-enable stay simple.
+   ========================================================================== */
+.about-glow-a,
+.about-glow-b,
+.services-glow,
+.why-glow,
+.news-glow,
+.testi-glow,
+.hero-glow,
+.story-glow,
+.blog-glow,
+.footer-glow,
+.career-hero-glow,
+.career-glow-orb {
+  display: none;
 }

@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import "./ContactUsPage.css";
+import { usePageReveal } from "../hooks/useRevealOnScroll";
 
 function ContactUsPage() {
   const [formData, setFormData] = useState({
@@ -14,29 +15,9 @@ function ContactUsPage() {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  // Scroll reveal trigger
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const revealEls = document.querySelectorAll(
-      ".contact-page-wrapper .reveal, .contact-page-wrapper .reveal-l, .contact-page-wrapper .reveal-r",
-    );
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-    );
-
-    revealEls.forEach((el) => observer.observe(el));
-    return () => {
-      revealEls.forEach((el) => observer.unobserve(el));
-    };
-  }, []);
+  usePageReveal(
+    ".contact-page-wrapper .reveal, .contact-page-wrapper .reveal-l, .contact-page-wrapper .reveal-r",
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -127,10 +108,8 @@ function ContactUsPage() {
 
       {/* Info cards */}
       <div className="info-section">
-        <div className="info-glow"></div>
         <div className="info-cards">
           <div className="info-card reveal" style={{ transitionDelay: "0s" }}>
-            <div className="info-card-glow"></div>
             <div className="info-card-icon">
               <svg
                 className="w-6 h-6"
@@ -163,7 +142,6 @@ function ContactUsPage() {
             className="info-card reveal"
             style={{ transitionDelay: "0.15s" }}
           >
-            <div className="info-card-glow"></div>
             <div className="info-card-icon">
               <svg
                 className="w-6 h-6"
@@ -183,7 +161,6 @@ function ContactUsPage() {
             <a href="tel:+917014294738">+91-7014-294-738</a>
           </div>
           <div className="info-card reveal" style={{ transitionDelay: "0.3s" }}>
-            <div className="info-card-glow"></div>
             <div className="info-card-icon">
               <svg
                 className="w-6 h-6"

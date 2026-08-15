@@ -20,21 +20,18 @@
   justify-content: center;
   flex-direction: column;
   gap: 12px;
-  background:
-    linear-gradient(rgba(11,12,16,0.62), rgba(11,12,16,0.55)),
-    url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&h=500&fit=crop');
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(135deg, var(--blue-deep), var(--blue));
 }
 .contact-banner h1 {
   color: #fff;
-  font-size: 42px;
+  font-size: var(--text-display);
   font-weight: 800;
+  letter-spacing: var(--tracking-display);
   opacity: 0;
   animation: fadeUpContact 0.8s ease forwards 0.1s;
 }
 .contact-banner p {
-  color: rgba(255,255,255,0.75);
+  color: rgba(255,255,255,0.8);
   font-size: 15px;
   opacity: 0;
   animation: fadeUpContact 0.8s ease forwards 0.25s;
@@ -51,12 +48,7 @@
     #f6f8fb;
 }
 .contact-page-wrapper .info-glow {
-  position: absolute;
-  width: 500px; height: 500px;
-  top: -200px; right: -100px;
-  background: radial-gradient(circle, rgba(13,95,212,0.12), transparent 70%);
-  filter: blur(30px);
-  pointer-events: none;
+  display: none;
 }
 
 .contact-page-wrapper .info-cards {
@@ -84,12 +76,7 @@
   box-shadow: 0 30px 65px rgba(13,95,212,0.15);
 }
 .contact-page-wrapper .info-card-glow {
-  position: absolute;
-  width: 200px; height: 200px;
-  top: -60px; right: -60px;
-  background: radial-gradient(circle, rgba(13,95,212,0.45), transparent 65%);
-  filter: blur(20px);
-  pointer-events: none;
+  display: none;
 }
 .contact-page-wrapper .info-card-icon {
   position: relative;
@@ -151,8 +138,9 @@
   margin-bottom: 10px;
 }
 .contact-page-wrapper .form-side h2 {
-  font-size: 30px;
+  font-size: var(--text-h2);
   font-weight: 800;
+  letter-spacing: var(--tracking-h2);
   color: #0b0c10;
   margin-bottom: 32px;
 }
@@ -218,8 +206,9 @@
   margin-bottom: 10px;
 }
 .contact-page-wrapper .map-side h2 {
-  font-size: 30px;
+  font-size: var(--text-h2);
   font-weight: 800;
+  letter-spacing: var(--tracking-h2);
   color: #0b0c10;
   margin-bottom: 24px;
 }

@@ -1,29 +1,9 @@
-import { useEffect, useRef } from 'react';
 import './ServicesPage.css';
 import serviceSpecialty from '../assets/salesforce/service2.jpg';
+import { usePageReveal } from '../hooks/useRevealOnScroll';
 
 function ServicesPage() {
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    const elements = document.querySelectorAll('.reveal, .reveal-l, .reveal-r');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => elements.forEach((el) => observer.unobserve(el));
-  }, []);
+  usePageReveal('.reveal, .reveal-l, .reveal-r', { threshold: 0.15, rootMargin: '0px' });
 
   const handleLinkClick = (e, path) => {
     e.preventDefault();
@@ -33,11 +13,10 @@ function ServicesPage() {
   };
 
   return (
-    <div className="services-page" ref={scrollRef}>
-      
+    <div className="services-page">
+
       {/* Premium Hero Section */}
       <div className="services-hero">
-        <div className="hero-bg-glow"></div>
         <div className="services-hero-content">
           <span className="eyebrow reveal">Our Expertise</span>
           <h1 className="reveal" style={{ transitionDelay: '0.1s' }}>Transforming Visions into Digital Reality</h1>
@@ -54,7 +33,7 @@ function ServicesPage() {
           {/* Left Image Area */}
           <div className="specialties-img-wrap reveal-l">
             <div className="img-accent-blur"></div>
-            <img src={serviceSpecialty} alt="Our Specialties" />
+            <img src={serviceSpecialty} alt="Our Specialties" loading="lazy" />
           </div>
 
           {/* Right Text Area */}

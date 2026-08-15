@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll';
 import newsOneImg from '../assets/latestnew/latestnewone.jpg';
 import newsTwoImg from '../assets/latestnew/latestnewtwo.jpg';
 import newsThreeImg from '../assets/latestnew/latestnewthree.jpg';
@@ -36,35 +36,10 @@ const ARTICLES_DATA = [
 ];
 
 function LatestNews({ onLinkClick }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const [sectionRef, isVisible] = useRevealOnScroll();
 
   return (
     <section ref={sectionRef} id="news" className="news-section w-full">
-      <div className="news-glow" />
-
       <div className="max-w-7xl mx-auto w-full px-6">
         <div className={`heading-block ${isVisible ? 'animate-in' : ''}`}>
           <div className="eyebrow">Latest news</div>
@@ -80,7 +55,7 @@ function LatestNews({ onLinkClick }) {
             >
               <div className="article-img-wrap">
                 <span className="category-badge">{article.category}</span>
-                <img src={article.img} alt={article.title} />
+                <img src={article.img} alt={article.title} loading="lazy" />
               </div>
               <div className="article-body">
                 <h3>{article.title}</h3>

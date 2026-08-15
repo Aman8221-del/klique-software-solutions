@@ -1,32 +1,15 @@
-import { useEffect } from 'react';
 import service1 from '../assets/salesforce/sevices1.jpg';
 import service2 from '../assets/salesforce/service2.jpg';
+import { usePageReveal } from '../hooks/useRevealOnScroll';
 
 function SEOServicePage() {
-  // Scroll reveal trigger
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    const revealEls = document.querySelectorAll('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    revealEls.forEach(el => observer.observe(el));
-    return () => {
-      revealEls.forEach(el => observer.unobserve(el));
-    };
-  }, []);
+  usePageReveal('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
 
   return (
     <div className="service-page-wrapper w-full bg-[#f6f8fb]">
       {/* Banner */}
-      <div 
-        className="page-banner" 
+      <div
+        className="page-banner"
         style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${service1})` }}
       >
         <h1>SEO</h1>
@@ -36,35 +19,35 @@ function SEOServicePage() {
         {/* Main content */}
         <div className="main-content">
           <div className="section-eyebrow reveal">Our services</div>
-          <h2 style={{ fontSize: '32px', fontWeight: '800', color: '#0b0c10', marginBottom: '36px' }} className="reveal">SEO</h2>
+          <h2 className="service-section-title reveal">SEO</h2>
 
           {/* Intro row */}
           <div className="intro-row">
             <div className="intro-img-wrap reveal-l">
-              <img src={service2} alt="SEO" />
+              <img src={service2} alt="SEO" loading="lazy" />
             </div>
             <div className="intro-text reveal-r">
-              <p style={{ fontSize: '15px', lineHeight: '1.8', color: '#565a66' }}>
+              <p className="service-lede">
                 Welcome to Klique, your one-stop solution for all your needs. Our company specializes in providing top-notch products and services to our valued customers. With years of experience and a dedicated team of experts, we aim to deliver the best possible solutions to meet your requirements.
               </p>
             </div>
           </div>
 
-          <div className="reveal" style={{ marginTop: '40px', marginBottom: '40px' }}>
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Our Services:</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', marginBottom: '16px' }}>
+          <div className="service-block reveal">
+            <h3 className="service-subhead">Our Services:</h3>
+            <p className="service-body" style={{ marginBottom: 'var(--space-4)' }}>
               At Klique, we offer a wide range of products and services to cater to all your needs. Our services include:
             </p>
-            <ul style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', paddingLeft: '24px', listStyleType: 'disc', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <ul className="service-list bulleted">
               <li><strong>Product A:</strong> Our top-quality product A is designed to meet the needs of businesses of all sizes. Whether you are a small startup or a large corporation, we have the solution for you.</li>
               <li><strong>Service B:</strong> Our team of experts provides professional service B, which is tailored to your specific needs. Our focus is on delivering the best possible results for our customers.</li>
               <li><strong>Service C:</strong> With our advanced technology and innovative solutions, we are able to offer Service C, which is designed to meet the needs of businesses in the modern world.</li>
             </ul>
           </div>
 
-          <div className="reveal" style={{ marginBottom: '40px' }}>
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Quality And Customer Satisfaction:</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280' }}>
+          <div className="service-block reveal">
+            <h3 className="service-subhead">Quality And Customer Satisfaction:</h3>
+            <p className="service-body">
               At <strong>Klique</strong>, we understand the importance of quality and customer satisfaction. Our commitment to providing top-notch products and services is reflected in our commitment to quality and customer satisfaction. We are dedicated to ensuring that every customer is completely satisfied with our products and services.
             </p>
           </div>
@@ -72,21 +55,21 @@ function SEOServicePage() {
           {/* Image pair */}
           <div className="img-pair">
             <div className="img-pair-item reveal-l">
-              <img src={service2} alt="SEO 1" />
+              <img src={service2} alt="SEO 1" loading="lazy" />
             </div>
             <div className="img-pair-item reveal-r">
-              <img src={service1} alt="SEO 2" />
+              <img src={service1} alt="SEO 2" loading="lazy" />
             </div>
           </div>
 
-          <div className="reveal" style={{ marginTop: '40px' }}>
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Contact Us:</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280', marginBottom: '30px' }}>
+          <div className="service-block reveal">
+            <h3 className="service-subhead">Contact Us:</h3>
+            <p className="service-body" style={{ marginBottom: 'var(--space-6)' }}>
               If you have any questions or need assistance with any of our products and services, please feel free to contact us. Our friendly and knowledgeable staff is always here to help.
             </p>
-            
-            <h3 style={{ color: '#0d5fd4', fontSize: '18px', fontWeight: '700', marginBottom: '16px' }}>Conclusion:</h3>
-            <p style={{ fontSize: '14px', lineHeight: '1.8', color: '#6b7280' }}>
+
+            <h3 className="service-subhead">Conclusion:</h3>
+            <p className="service-body">
               At Klique, we are dedicated to providing our customers with the best possible products and services. With our commitment to quality and customer satisfaction, we are confident that you will be completely satisfied with our products and services. Contact us today to learn more about what we can do for you.
             </p>
           </div>
