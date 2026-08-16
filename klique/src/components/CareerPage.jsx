@@ -399,7 +399,19 @@ function CareerPage({ onContactClick }) {
                       <div className="career-job-icon">{initials}</div>
 
                       <div>
-                        <div className="career-job-title">{job.title}</div>
+                        <div className="career-job-title-row">
+                          <div className="career-job-title">{job.title}</div>
+
+                          <span
+                            className={`career-job-status ${
+                              job.status === "Active"
+                                ? "status-open"
+                                : "status-closed"
+                            }`}
+                          >
+                            {job.status === "Active" ? "Open" : "Closed"}
+                          </span>
+                        </div>
 
                         <div className="career-job-meta">
                           {/* Location */}
@@ -461,10 +473,21 @@ function CareerPage({ onContactClick }) {
                     </div>
 
                     <button
-                      onClick={() => setActiveJob(job)}
-                      className="career-apply-btn"
+                      onClick={() => {
+                        if (job.status === "Active") {
+                          setActiveJob(job);
+                        }
+                      }}
+                      disabled={job.status !== "Active"}
+                      className={`career-apply-btn ${
+                        job.status !== "Active"
+                          ? "career-apply-btn-disabled"
+                          : ""
+                      }`}
                     >
-                      Apply now
+                      {job.status === "Active"
+                        ? "Apply now"
+                        : "Applications Closed"}
                     </button>
                   </div>
                 );
