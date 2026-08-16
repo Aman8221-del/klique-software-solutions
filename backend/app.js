@@ -8,6 +8,7 @@ const helmet = require("helmet");
 
 const contactRoutes = require("./src/routes/contactRoute");
 const authRoutes = require("./src/routes/authRoutes");
+const jobRoutes = require("./src/routes/jobRoutes");
 
 const app = express();
 
@@ -24,5 +25,9 @@ app.use("/api/contact", contactRoutes.publicRouter);
 
 // Admin messages
 app.use("/api/admin/messages", contactRoutes.adminRouter);
+
+// Jobs
+
+app.use("/api/jobs", jobRoutes);
 
 module.exports = app;
