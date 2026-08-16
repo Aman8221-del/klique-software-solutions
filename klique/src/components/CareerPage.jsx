@@ -139,6 +139,13 @@ function CareerPage({ onContactClick }) {
     }
   };
 
+  const scrollToJobs = () => {
+    document.getElementById("open-positions")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <div className="career-page w-full">
       {/* HERO SECTION */}
@@ -368,7 +375,7 @@ function CareerPage({ onContactClick }) {
       </section>
 
       {/* OPEN POSITIONS LIST */}
-      <section className="career-jobs-section">
+      <section id="open-positions" className="career-jobs-section">
         <div className="career-jobs-gradient" />
         <div className="career-jobs-inner">
           <div className="career-section-head career-reveal">
@@ -546,7 +553,7 @@ function CareerPage({ onContactClick }) {
           Send us your resume — we will contact you whenever a matching opening
           comes up.
         </p>
-        <button onClick={onContactClick} className="career-cta-btn">
+        <button onClick={scrollToJobs} className="career-cta-btn">
           Send your resume &rarr;
         </button>
       </section>
