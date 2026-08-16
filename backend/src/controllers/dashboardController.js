@@ -8,21 +8,17 @@ const getDashboardStats = async (req, res) => {
       totalMessages,
       activeJobs,
       totalApplications,
-      newApplications,
       recentMessages,
       recentApplications,
     ] = await Promise.all([
       // Total Messages
       Contact.countDocuments(),
 
-      // Active Jobs = only jobs whose status is Live
+      // Only Live Jobs
       Job.countDocuments({ status: "Live" }),
 
       // Total Applications
       Application.countDocuments(),
-
-      // New Applications
-      Application.countDocuments({ status: "New" }),
 
       // Recent Messages
       Contact.find()
@@ -40,14 +36,11 @@ const getDashboardStats = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-
       cards: {
         totalMessages,
         activeJobs,
         totalApplications,
-        newApplications,
       },
-
       recentMessages,
       recentApplications,
     });
