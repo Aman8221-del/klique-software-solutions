@@ -2,12 +2,17 @@ const Application = require("../models/appilaction.model");
 const Job = require("../models/jobs.model");
 const cloudinary = require("../config/cloudinary");
 
+// ==========================================
+// Apply For Job
+// ==========================================
 const applyForJob = async (req, res) => {
   try {
     const { jobId, name, email, message } = req.body;
+
     console.log("BODY:", req.body);
     console.log("FILE:", req.file);
-    // Required fields check
+
+    // Required fields
     if (!jobId || !name || !email) {
       return res.status(400).json({
         success: false,
@@ -41,15 +46,18 @@ const applyForJob = async (req, res) => {
           resource_type: "raw",
         },
         (error, result) => {
-          if (error) reject(error);
-          else resolve(result);
+          if (error) {
+            reject(error);
+          } else {
+            resolve(result);
+          }
         },
       );
 
       uploadStream.end(req.file.buffer);
     });
 
-    // Save application in MongoDB
+    // Save application
     const application = await Application.create({
       job: jobId,
       name,
@@ -74,8 +82,9 @@ const applyForJob = async (req, res) => {
   }
 };
 
-//Admin: show all applications
-
+// ==========================================
+// Admin - Get All Applications
+// ==========================================
 const getApplications = async (req, res) => {
   try {
     const applications = await Application.find()
@@ -96,7 +105,97 @@ const getApplications = async (req, res) => {
   }
 };
 
+// ==========================================
+// Admin - View Resume
+// ==========================================
+const viewResume = async (req, res) => {
+  try {
+    const application = await Application.findById(req.params.id);
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    if (!application.resumeUrl) {
+      return res.status(404).json({
+        success: false,
+        message: "Resume not found",
+      });
+    }
+
+    // Open resume in browser
+    return res.redirect(application.resumeUrl);
+  } catch (error) {
+    console.error("View resume error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Failed to view resume",
+    });
+  }
+};
+
+// ==========================================
+// Admin - Download Resume
+// ==========================================
+const downloadResume = async (req, res) => {
+  try {
+    const application = await Application.findById(req.params.id);
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    if (!application.resumeUrl) {
+      return res.status(404).json({
+        success: false,
+        message: "Resume not found",
+      });
+    }
+
+    // Fetch file from Cloudinary
+    const response = await fetch(application.resumeUrl);
+
+    if (!response.ok) {
+      return res.status(500).json({
+        success: false,
+        message: "Unable to fetch resume",
+      });
+    }
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    // Set headers for download
+    res.setHeader(
+      "Content-Type",
+      response.headers.get("content-type") || "application/pdf",
+    );
+
+    res.setHeader("Content-Disposition", 'attachment; filename="resume.pdf"');
+
+    res.send(buffer);
+  } catch (error) {
+    console.error("Download resume error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message || "Failed to download resume",
+    });
+  }
+};
+
+// ==========================================
+// Exports
+// ==========================================
 module.exports = {
   applyForJob,
   getApplications,
+  viewResume,
+  downloadResume,
 };
