@@ -404,12 +404,12 @@ function CareerPage({ onContactClick }) {
 
                           <span
                             className={`career-job-status ${
-                              job.status === "Active"
+                              job.status === "Live"
                                 ? "status-open"
                                 : "status-closed"
                             }`}
                           >
-                            {job.status === "Active" ? "Open" : "Closed"}
+                            {job.status === "Live" ? "Open" : "Closed"}
                           </span>
                         </div>
 
