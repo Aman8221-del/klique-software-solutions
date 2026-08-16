@@ -485,7 +485,7 @@ function CareerPage({ onContactClick }) {
                           : ""
                       }`}
                     >
-                      {job.status === "Active"
+                      {job.status === "Live"
                         ? "Apply now"
                         : "Applications Closed"}
                     </button>
