@@ -14,6 +14,8 @@ const applicationRoutes = require("./src/routes/applicationsRoutes");
 
 const adminApplicationRoutes = require("./src/routes/adminApplicationRoutes");
 
+const dashboardRoutes = require("./src/routes/dashboardRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -23,6 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 
 // Admin auth
 app.use("/api/admin", authRoutes);
+
+// Dashboard
+app.use("/api/admin/dashboard", dashboardRoutes);
 
 // Public contact form
 app.use("/api/contact", contactRoutes.publicRouter);
