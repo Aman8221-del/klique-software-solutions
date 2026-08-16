@@ -137,15 +137,13 @@ const viewResume = async (req, res) => {
 
     const buffer = Buffer.from(await response.arrayBuffer());
 
-    res.setHeader(
-      "Content-Type",
-      response.headers.get("content-type") || "application/pdf",
-    );
+    res.status(200);
 
-    // IMPORTANT:
-    // inline = browser mein open karega
-    // attachment = download karega
-    res.setHeader("Content-Disposition", 'inline; filename="resume.pdf"');
+    res.setHeader("Content-Type", "application/pdf");
+
+    res.setHeader("Content-Disposition", `inline; filename="resume.pdf"`);
+
+    res.setHeader("Content-Length", buffer.length);
 
     res.send(buffer);
   } catch (error) {
