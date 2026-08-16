@@ -1,9 +1,19 @@
 const express = require("express");
+const {
+  createContactMessage,
+  getContactMessages,
+} = require("../controllers/messageController");
 
-const { createContactMessage } = require("../controllers/contactController");
+const { protectAdmin } = require("../middleware/authMiddleware");
 
-const router = express.Router();
+const publicRouter = express.Router();
+const adminRouter = express.Router();
 
-router.post("/", createContactMessage);
+publicRouter.post("/", createContactMessage);
 
-module.exports = router;
+adminRouter.get("/", protectAdmin, getContactMessages);
+
+module.exports = {
+  publicRouter,
+  adminRouter,
+};

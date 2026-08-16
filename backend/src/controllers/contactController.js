@@ -36,6 +36,28 @@ const createContactMessage = async (req, res) => {
   }
 };
 
+//Admin: get all contact messages
+
+const getContactMessages = async (req, res) => {
+  try {
+    const messages = await ContactMessage.find().sort({ createdAt: -1 }).lean();
+
+    return res.status(200).json({
+      success: true,
+      count: messages.length,
+      data: messages,
+    });
+  } catch (error) {
+    console.error("Get contact messages error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "failed to fetch contact messages",
+    });
+  }
+};
+
 module.exports = {
   createContactMessage,
+  getContactMessages,
 };
