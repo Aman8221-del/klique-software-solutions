@@ -12,6 +12,8 @@ const jobRoutes = require("./src/routes/jobRoutes");
 
 const applicationRoutes = require("./src/routes/applicationsRoutes");
 
+const adminApplicationRoutes = require("./src/routes/adminApplicationRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -20,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Admin auth
-app.use("/api/adinm", authRoutes);
+app.use("/api/admin", authRoutes);
 
 // Public contact form
 app.use("/api/contact", contactRoutes.publicRouter);
@@ -34,5 +36,8 @@ app.use("/api/jobs", jobRoutes);
 
 // applications
 app.use("/api/applications", applicationRoutes);
+
+// Admin applications
+app.use("/api/admin", adminApplicationRoutes);
 
 module.exports = app;

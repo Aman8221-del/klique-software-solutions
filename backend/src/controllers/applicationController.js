@@ -74,6 +74,29 @@ const applyForJob = async (req, res) => {
   }
 };
 
+//Admin: show all applications
+
+const getApplications = async (req, res) => {
+  try {
+    const applications = await Application.find()
+      .populate("job", "title department")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      data: applications,
+    });
+  } catch (error) {
+    console.error("Get applications error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message || "Failed to fetch applications",
+    });
+  }
+};
+
 module.exports = {
   applyForJob,
+  getApplications,
 };
