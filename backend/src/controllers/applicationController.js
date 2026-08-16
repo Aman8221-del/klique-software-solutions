@@ -126,8 +126,28 @@ const viewResume = async (req, res) => {
       });
     }
 
-    // Open resume in browser
-    return res.redirect(application.resumeUrl);
+    const response = await fetch(application.resumeUrl);
+
+    if (!response.ok) {
+      return res.status(500).json({
+        success: false,
+        message: "Unable to fetch resume",
+      });
+    }
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+
+    res.setHeader(
+      "Content-Type",
+      response.headers.get("content-type") || "application/pdf",
+    );
+
+    // IMPORTANT:
+    // inline = browser mein open karega
+    // attachment = download karega
+    res.setHeader("Content-Disposition", 'inline; filename="resume.pdf"');
+
+    res.send(buffer);
   } catch (error) {
     console.error("View resume error:", error);
 
