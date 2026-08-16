@@ -208,6 +208,34 @@ const downloadResume = async (req, res) => {
   }
 };
 
+const deleteApplication = async (req, res) => {
+  try {
+    const application = await Application.findById(req.params.id);
+
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    // Delete application from MongoDB
+    await Application.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      success: true,
+      message: "Application deleted successfully",
+    });
+  } catch (error) {
+    console.error("Delete application error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete application",
+    });
+  }
+};
+
 // ==========================================
 // Exports
 // ==========================================
@@ -216,4 +244,5 @@ module.exports = {
   getApplications,
   viewResume,
   downloadResume,
+  deleteApplication,
 };
