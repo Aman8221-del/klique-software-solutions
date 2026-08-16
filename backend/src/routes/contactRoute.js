@@ -2,7 +2,7 @@ const express = require("express");
 const {
   createContactMessage,
   getContactMessages,
-} = require("../controllers/messageController");
+} = require("../controllers/contactController");
 
 const { protectAdmin } = require("../middleware/authMiddleware");
 
