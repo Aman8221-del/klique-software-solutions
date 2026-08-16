@@ -12,7 +12,7 @@ function CareerPage({ onContactClick }) {
   const [activeJob, setActiveJob] = useState(null);
   const [applicantName, setApplicantName] = useState("");
   const [applicantEmail, setApplicantEmail] = useState("");
-  const [applicantResume, setApplicantResume] = useState("");
+  const [applicantResume, setApplicantResume] = useState(null);
   const [applicantMessage, setApplicantMessage] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -90,17 +90,53 @@ function CareerPage({ onContactClick }) {
     setSearchCategory("All categories");
   };
 
-  const handleApplySubmit = (e) => {
+  const handleApplySubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setActiveJob(null);
-      setApplicantName("");
-      setApplicantEmail("");
-      setApplicantResume("");
-      setApplicantMessage("");
-    }, 2500);
+
+    if (!applicantResume) {
+      alert("Please select your resume.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("jobId", activeJob._id);
+    formData.append("name", applicantName);
+    formData.append("email", applicantEmail);
+    formData.append("message", applicantMessage);
+    formData.append("resume", applicantResume);
+
+    try {
+      const response = await fetch(
+        "https://klique-software-solutions.onrender.com/api/applications/apply",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to submit application");
+      }
+
+      console.log("Application submitted:", result);
+
+      setFormSubmitted(true);
+
+      setTimeout(() => {
+        setFormSubmitted(false);
+        setActiveJob(null);
+        setApplicantName("");
+        setApplicantEmail("");
+        setApplicantResume(null);
+        setApplicantMessage("");
+      }, 2500);
+    } catch (error) {
+      console.error("Application failed:", error);
+      alert(error.message || "Failed to submit application. Please try again.");
+    }
   };
 
   return (
@@ -547,16 +583,14 @@ function CareerPage({ onContactClick }) {
 
                 <div className="blog-floating-group">
                   <input
-                    type="url"
+                    type="file"
                     required
-                    value={applicantResume}
-                    onChange={(e) => setApplicantResume(e.target.value)}
-                    placeholder=" "
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    onChange={(e) => setApplicantResume(e.target.files[0])}
                     className="blog-floating-input"
                   />
-                  <label className="blog-floating-label">
-                    Link to Resume / Portfolio*
-                  </label>
+
+                  <label className="blog-floating-label">Upload Resume*</label>
                 </div>
 
                 <div className="blog-floating-group">

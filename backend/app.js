@@ -10,6 +10,8 @@ const contactRoutes = require("./src/routes/contactRoute");
 const authRoutes = require("./src/routes/authRoutes");
 const jobRoutes = require("./src/routes/jobRoutes");
 
+const applicationRoutes = require("./src/routes/applicationsRoutes");
+
 const app = express();
 
 app.use(cors());
@@ -29,5 +31,8 @@ app.use("/api/admin/messages", contactRoutes.adminRouter);
 // Jobs
 
 app.use("/api/jobs", jobRoutes);
+
+// applications
+app.use("/api/applications", applicationRoutes);
 
 module.exports = app;
