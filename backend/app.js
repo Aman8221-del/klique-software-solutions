@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Admin auth
-app.use("/api/admin", authRoutes);
+app.use("/api/adinm", authRoutes);
 
 // Public contact form
 app.use("/api/contact", contactRoutes.publicRouter);
