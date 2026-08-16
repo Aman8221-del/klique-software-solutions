@@ -1,4 +1,4 @@
-const Contact = require("../models/contact.model");
+const Contact = require("../models/ContactMessage");
 const Job = require("../models/jobs.model");
 const Application = require("../models/appilaction.model");
 
