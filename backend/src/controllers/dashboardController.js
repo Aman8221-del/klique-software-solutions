@@ -15,8 +15,8 @@ const getDashboardStats = async (req, res) => {
       // Total Messages
       Contact.countDocuments(),
 
-      // Active Jobs
-      Job.countDocuments({ status: "Active" }),
+      // Active Jobs = only jobs whose status is Live
+      Job.countDocuments({ status: "Live" }),
 
       // Total Applications
       Application.countDocuments(),
