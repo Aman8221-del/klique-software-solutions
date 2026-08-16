@@ -474,15 +474,13 @@ function CareerPage({ onContactClick }) {
 
                     <button
                       onClick={() => {
-                        if (job.status === "Active") {
+                        if (job.status === "Live") {
                           setActiveJob(job);
                         }
                       }}
-                      disabled={job.status !== "Active"}
+                      disabled={job.status !== "Live"}
                       className={`career-apply-btn ${
-                        job.status !== "Active"
-                          ? "career-apply-btn-disabled"
-                          : ""
+                        job.status !== "Live" ? "career-apply-btn-disabled" : ""
                       }`}
                     >
                       {job.status === "Live"
