@@ -58,7 +58,7 @@ const getAllJobs = async (req, res) => {
 const getPublicJobs = async (req, res) => {
   try {
     const jobs = await Job.find({
-      status: { $in: ["Open", "Closed"] },
+      status: { $in: ["Live", "Closed"] },
     }).sort({ createdAt: -1 });
 
     res.status(200).json({
