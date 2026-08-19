@@ -70,17 +70,27 @@ const loginAdmin = async (req, res) => {
 // CREATE ADMIN
 const createAdmin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     // Validate input
-    if (!email || !password) {
+    if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
-        message: "Email and password are required",
+        message: "Name, email and password are required",
       });
     }
 
+    // Normalize input
+    const normalizedName = name.trim();
     const normalizedEmail = email.toLowerCase().trim();
+
+    // Validate name
+    if (normalizedName.length < 2) {
+      return res.status(400).json({
+        success: false,
+        message: "Name must be at least 2 characters",
+      });
+    }
 
     // Check if admin already exists
     const existingAdmin = await Admin.findOne({
@@ -107,6 +117,7 @@ const createAdmin = async (req, res) => {
 
     // Create admin
     const admin = await Admin.create({
+      name: normalizedName,
       email: normalizedEmail,
       password: hashedPassword,
     });

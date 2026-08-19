@@ -1,19 +1,24 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const bcrypt = require('bcryptjs');
-const connectDB = require('../config/db');
-const Admin = require('../models/Admin');
+const bcrypt = require("bcryptjs");
+const connectDB = require("../config/db");
+const Admin = require("../models/Admin");
 
 const seedAdmin = async () => {
   try {
-    if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+    if (
+      !process.env.ADMIN_NAME ||
+      !process.env.ADMIN_EMAIL ||
+      !process.env.ADMIN_PASSWORD
+    ) {
       throw new Error(
-        'ADMIN_EMAIL and ADMIN_PASSWORD must be set in server/.env'
+        "ADMIN_NAME, ADMIN_EMAIL and ADMIN_PASSWORD must be set in server/.env",
       );
     }
 
     await connectDB();
 
+    const name = process.env.ADMIN_NAME.trim();
     const email = process.env.ADMIN_EMAIL.toLowerCase().trim();
 
     const existingAdmin = await Admin.findOne({ email });
@@ -23,12 +28,10 @@ const seedAdmin = async () => {
       process.exit(0);
     }
 
-    const hashedPassword = await bcrypt.hash(
-      process.env.ADMIN_PASSWORD,
-      12
-    );
+    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);
 
     const admin = await Admin.create({
+      name,
       email,
       password: hashedPassword,
     });
@@ -36,7 +39,7 @@ const seedAdmin = async () => {
     console.log(`Admin created successfully: ${admin.email}`);
     process.exit(0);
   } catch (error) {
-    console.error('Failed to create admin:', error.message);
+    console.error("Failed to create admin:", error.message);
     process.exit(1);
   }
 };
