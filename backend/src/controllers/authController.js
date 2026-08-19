@@ -67,6 +67,69 @@ const loginAdmin = async (req, res) => {
   }
 };
 
+// CREATE ADMIN
+const createAdmin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required",
+      });
+    }
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    // Check if admin already exists
+    const existingAdmin = await Admin.findOne({
+      email: normalizedEmail,
+    });
+
+    if (existingAdmin) {
+      return res.status(409).json({
+        success: false,
+        message: "Admin with this email already exists",
+      });
+    }
+
+    // Validate password
+    if (password.length < 8) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters",
+      });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create admin
+    const admin = await Admin.create({
+      email: normalizedEmail,
+      password: hashedPassword,
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Admin created successfully",
+      admin: {
+        id: admin._id,
+        email: admin.email,
+      },
+    });
+  } catch (error) {
+    console.error("Create admin error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error while creating admin",
+    });
+  }
+};
+
 module.exports = {
   loginAdmin,
+  createAdmin,
 };
