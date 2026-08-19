@@ -4,7 +4,7 @@ const router = express.Router();
 
 const { loginAdmin, createAdmin } = require("../controllers/authController");
 
-const protectAdmin = require("../middleware/authMiddleware");
+const { protectAdmin } = require("../middleware/authMiddleware");
 
 router.post("/login", loginAdmin);
 
