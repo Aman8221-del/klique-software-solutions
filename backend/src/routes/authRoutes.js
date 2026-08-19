@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { loginAdmin, createAdmin } = require("../controllers/authController");
 
-const protectAdmin = require("../middleware/protectAdmin");
+const protectAdmin = require("../middleware/authMiddleware");
 
 router.post("/login", loginAdmin);
 
