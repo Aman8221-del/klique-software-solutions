@@ -17,6 +17,9 @@ import PDFRemediationPage from "./components/PDFRemediationPage";
 import ContactUsPage from "./components/ContactUsPage";
 import ApplyFormPage from "./components/ApplyFormPage";
 import ServicesPage from "./components/ServicesPage";
+import PrivacyPolicyPage from "./components/PrivacyPolicyPage";
+import TermsConditionsPage from "./components/TermsConditionsPage";
+import CookiePolicyPage from "./components/CookiePolicyPage";
 import HeroSectionImage from "./assets/mainheroimage.jpg";
 import logo from "./assets/kliquelogo.png";
 
@@ -80,6 +83,15 @@ function App() {
       } else if (window.location.pathname === "/contact-us") {
         setCurrentView("contact");
         window.scrollTo(0, 0);
+      } else if (window.location.pathname === "/privacy-policy") {
+        setCurrentView("privacy-policy");
+        window.scrollTo(0, 0);
+      } else if (window.location.pathname === "/terms-conditions") {
+        setCurrentView("terms-conditions");
+        window.scrollTo(0, 0);
+      } else if (window.location.pathname === "/cookie-policy") {
+        setCurrentView("cookie-policy");
+        window.scrollTo(0, 0);
       } else if (window.location.pathname.startsWith("/apply-")) {
         setCurrentView(window.location.pathname.substring(1)); // e.g. apply-trainer
         window.scrollTo(0, 0);
@@ -125,6 +137,21 @@ function App() {
       e.preventDefault();
       setCurrentView("contact");
       window.history.pushState(null, null, "/contact-us");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (href === "/privacy-policy") {
+      e.preventDefault();
+      setCurrentView("privacy-policy");
+      window.history.pushState(null, null, "/privacy-policy");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (href === "/terms-conditions") {
+      e.preventDefault();
+      setCurrentView("terms-conditions");
+      window.history.pushState(null, null, "/terms-conditions");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (href === "/cookie-policy") {
+      e.preventDefault();
+      setCurrentView("cookie-policy");
+      window.history.pushState(null, null, "/cookie-policy");
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (href.startsWith("/apply-")) {
       e.preventDefault();
@@ -562,6 +589,12 @@ function App() {
           <CareerPage onContactClick={(e) => handleNavClick(e, "#contact")} />
         ) : currentView === "contact" ? (
           <ContactUsPage />
+        ) : currentView === "privacy-policy" ? (
+          <PrivacyPolicyPage />
+        ) : currentView === "terms-conditions" ? (
+          <TermsConditionsPage />
+        ) : currentView === "cookie-policy" ? (
+          <CookiePolicyPage />
         ) : currentView === "services" ? (
           <ServicesPage />
         ) : currentView.startsWith("apply-") ? (

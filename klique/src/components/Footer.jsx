@@ -365,7 +365,8 @@ function Footer({ onLinkClick }) {
             {/* LEGAL LINKS */}
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
               <a
-                href="#"
+                href="/privacy-policy"
+                onClick={(e) => handleLink(e, "/privacy-policy")}
                 className="text-slate-500 hover:text-[#0d5fd4] transition-colors"
               >
                 Privacy Policy
@@ -374,7 +375,8 @@ function Footer({ onLinkClick }) {
               <span className="hidden sm:block text-slate-300">|</span>
 
               <a
-                href="#"
+                href="/terms-conditions"
+                onClick={(e) => handleLink(e, "/terms-conditions")}
                 className="text-slate-500 hover:text-[#0d5fd4] transition-colors"
               >
                 Terms & Conditions
@@ -383,7 +385,8 @@ function Footer({ onLinkClick }) {
               <span className="hidden sm:block text-slate-300">|</span>
 
               <a
-                href="#"
+                href="/cookie-policy"
+                onClick={(e) => handleLink(e, "/cookie-policy")}
                 className="text-slate-500 hover:text-[#0d5fd4] transition-colors"
               >
                 Cookie Policy

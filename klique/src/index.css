@@ -5368,3 +5368,108 @@ h2.blog-headline span {
 .career-glow-orb {
   display: none;
 }
+
+/* ==========================================================================
+   Legal pages (Privacy Policy, Terms & Conditions, Cookie Policy)
+   ========================================================================== */
+.legal-page {
+  width: 100%;
+  background: var(--surface);
+}
+
+.legal-banner {
+  padding: 160px 24px 56px;
+  text-align: center;
+  background: linear-gradient(135deg, var(--blue-deep), var(--blue));
+  color: #fff;
+}
+
+.legal-banner .eyebrow {
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.legal-banner h1 {
+  font-size: var(--text-h1);
+  font-weight: 800;
+  letter-spacing: var(--tracking-display);
+  color: #fff;
+  margin-bottom: var(--space-3);
+}
+
+.legal-banner p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--text-small);
+}
+
+.legal-content {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--section-y) 24px;
+}
+
+.legal-disclaimer {
+  background: var(--blue-pale);
+  border: 1px solid var(--blue-line);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-small);
+  line-height: 1.7;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-12);
+}
+
+.legal-disclaimer strong {
+  color: var(--ink);
+}
+
+.legal-content h2 {
+  font-size: var(--text-h3);
+  font-weight: 700;
+  letter-spacing: var(--tracking-h3);
+  color: var(--ink);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+}
+
+.legal-content h2:first-of-type {
+  margin-top: 0;
+}
+
+.legal-content p {
+  font-size: var(--text-small);
+  line-height: 1.8;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-4);
+}
+
+.legal-content ul {
+  list-style: disc;
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.legal-content li {
+  font-size: var(--text-small);
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.legal-content a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-content strong {
+  color: var(--ink);
+}
+
+@media (max-width: 640px) {
+  .legal-banner {
+    padding: 130px 20px 44px;
+  }
+}
