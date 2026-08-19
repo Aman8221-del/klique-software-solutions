@@ -54,6 +54,26 @@ const getAllJobs = async (req, res) => {
   }
 };
 
+// GET PUBLIC JOBS
+const getPublicJobs = async (req, res) => {
+  try {
+    const jobs = await Job.find({
+      status: { $in: ["Open", "Closed"] },
+    }).sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      count: jobs.length,
+      data: jobs,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 // GET SINGLE JOB
 const getJobById = async (req, res) => {
   try {
@@ -133,6 +153,7 @@ const deleteJob = async (req, res) => {
 module.exports = {
   createJob,
   getAllJobs,
+  getPublicJobs,
   getJobById,
   updateJob,
   deleteJob,

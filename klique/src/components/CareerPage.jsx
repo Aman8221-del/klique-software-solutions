@@ -23,7 +23,7 @@ function CareerPage({ onContactClick }) {
     const fetchJobs = async () => {
       try {
         const response = await fetch(
-          "https://klique-software-solutions.onrender.com/api/jobs",
+          "https://klique-software-solutions.onrender.com/api/jobs/public",
         );
 
         if (!response.ok) {
