@@ -65,7 +65,7 @@ function ContactUsPage() {
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+    
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
       return;
@@ -236,8 +236,56 @@ function ContactUsPage() {
                   placeholder="Tell us more about your project..."
                 ></textarea>{" "}
               </div>
-              {success && <p className="form-success">{success}</p>}
-              {error && <p className="form-error">{error}</p>}
+              {success && (
+                <div className="form-success-box">
+                  <div className="success-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+
+                  <div className="success-content">
+                    <h4>Message sent successfully!</h4>
+                    <p>
+                      {success ||
+                        "Thank you for contacting us. We'll get back to you soon."}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {error && (
+                <div className="form-error-box">
+                  <div className="error-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M12 9v4m0 4h.01M10.29 3.86l-8.18 14A2 2 0 003.82 21h16.36a2 2 0 001.71-3.14l-8.18-14a2 2 0 00-3.42 0z"
+                      />
+                    </svg>
+                  </div>
+
+                  <div className="error-content">
+                    <h4>Something went wrong</h4>
+                    <p>{error}</p>
+                  </div>
+                </div>
+              )}
               <button type="submit" className="submit-btn" disabled={loading}>
                 {loading ? "Sending..." : "Send message →"}
               </button>
