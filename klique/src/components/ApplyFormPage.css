@@ -243,3 +243,47 @@
   opacity:0;
   animation: fieldIn .5s ease forwards .46s;
 }
+
+.apply-page-wrapper.embedded {
+  min-height: auto;
+  padding: 0;
+  background: none;
+  display: block;
+}
+
+.apply-page-wrapper .apply-success {
+  text-align:center;
+  padding:30px 10px 10px;
+}
+.apply-page-wrapper .apply-success-icon {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:56px; height:56px;
+  border-radius:50%;
+  background:var(--blue-pale);
+  color:var(--blue);
+  font-size:26px;
+  font-weight:800;
+  margin-bottom:16px;
+}
+.apply-page-wrapper .apply-success h4 {
+  margin:0 0 8px;
+  color:var(--ink);
+  font-size:19px;
+  font-weight:800;
+}
+.apply-page-wrapper .apply-success p {
+  margin:0;
+  color:var(--ink-soft);
+  font-size:14px;
+}
+
+@media (max-width:420px){
+  .apply-page-wrapper { padding:100px 12px 40px; }
+  .apply-page-wrapper .form-header { padding:20px 20px; }
+  .apply-page-wrapper .form-header h2 { font-size:21px; }
+  .apply-page-wrapper .form-body { padding:20px 20px 20px; }
+  .apply-page-wrapper .upload-box { padding:14px 12px; }
+  .apply-page-wrapper .submit-btn { padding:14px 18px; font-size:14px; }
+}

@@ -47,9 +47,9 @@ function AboutSection({ onLinkClick }) {
             <div>
               <h3>Our mission</h3>
               <p>
-                We want to transform the current environment, where developers have a robotic tendency 
-                to offer a simple fix without regard for the end-user. Along with our specialised 
-                Salesforce solutions, we make a strong effort to restore that empathy and compassion.
+                Too many software fixes solve the ticket but ignore the person using the product.
+                We build our Salesforce solutions the other way around, starting with the end-user
+                and working back to the technical fix.
               </p>
             </div>
           </div>
@@ -67,9 +67,9 @@ function AboutSection({ onLinkClick }) {
             <div>
               <h3>Our story</h3>
               <p>
-                Our solutions, services, and products have assisted our clients in maximising their potential 
-                for growth thanks to our cutting-edge, best-in-class industry solutions that are supported 
-                by the most recent technology.
+                From day one, our focus has stayed on solving the business problem in front of us rather
+                than chasing whatever's trending in software. That practical approach is what has helped
+                our clients grow steadily, project after project.
               </p>
             </div>
           </div>

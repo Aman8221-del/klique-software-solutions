@@ -5,7 +5,13 @@ const applicationSchema = new mongoose.Schema(
     job: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Job",
-      required: true,
+      required: false,
+    },
+
+    position: {
+      type: String,
+      trim: true,
+      default: "",
     },
 
     name: {
@@ -19,6 +25,12 @@ const applicationSchema = new mongoose.Schema(
       required: true,
       trim: true,
       lowercase: true,
+    },
+
+    phone: {
+      type: String,
+      trim: true,
+      default: "",
     },
 
     resumeUrl: {

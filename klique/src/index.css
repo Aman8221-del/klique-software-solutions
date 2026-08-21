@@ -4554,10 +4554,17 @@ h2.blog-headline span {
   background: rgba(2, 44, 99, 0.45);
   backdrop-filter: blur(8px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 1000;
-  padding: 24px;
+  padding: 24px 20px; /* horizontal gutter matches .apply-page-wrapper so the shared form is exactly as wide as it is on the footer form */
+  overflow-y: auto;
+}
+
+@media (max-width: 420px) {
+  .career-modal-overlay {
+    padding: 24px 12px; /* matches .apply-page-wrapper's mobile breakpoint horizontal gutter */
+  }
 }
 
 .career-modal {
@@ -4623,6 +4630,109 @@ h2.blog-headline span {
   gap: 20px;
 }
 
+/* ---------- CAREER RESUME UPLOAD ---------- */
+.career-file-group {
+  width: 100%;
+}
+
+.career-file-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.career-file-required {
+  color: var(--blue-600);
+}
+
+.career-file-upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius-md, 12px);
+  padding: 14px 16px;
+  background: var(--blue-50, #f4f8ff);
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.career-file-upload:hover {
+  border-color: var(--blue-600);
+  background: #eef4ff;
+}
+
+.career-file-upload.has-file {
+  border-style: solid;
+  border-color: var(--blue-600);
+  background: #eef4ff;
+}
+
+.career-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.career-file-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-600);
+}
+
+.career-file-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.career-file-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.career-file-choose,
+.career-file-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.career-file-hint {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 480px) {
+  .career-file-upload {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .career-file-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .career-modal-submit-btn {
   background: var(--blue-600);
   color: #fff;
@@ -4683,6 +4793,22 @@ h2.blog-headline span {
   transition: none;
 }
 
+/* ---------- CAREER APPLY SHELL (wraps the shared ApplyFormPage form inside the modal, without adding its own box styling so the form stays identical in size to the footer version) ---------- */
+.career-apply-shell {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+}
+
+.career-apply-shell .career-modal-close {
+  color: rgba(255, 255, 255, 0.85);
+  z-index: 2;
+}
+
+.career-apply-shell .career-modal-close:hover {
+  color: #fff;
+}
+
 @media (min-width: 769px) {
   .career-modal-overlay {
     align-items: flex-start;
@@ -4692,6 +4818,9 @@ h2.blog-headline span {
   }
   .career-modal {
     margin: auto; /* To keep it horizontally centered when flex-start is applied, though justify-content: center already does it */
+  }
+  .career-apply-shell {
+    margin: auto;
   }
 }
 

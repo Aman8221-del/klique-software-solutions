@@ -360,6 +360,24 @@
   }
 }
 
+@media (max-width: 480px) {
+  .contact-banner {
+    height: auto;
+    padding: 90px 20px 32px;
+  }
+  .contact-page-wrapper .info-section,
+  .contact-page-wrapper .contact-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .contact-page-wrapper .info-card {
+    padding: 24px 20px;
+  }
+  .contact-page-wrapper .map-frame iframe {
+    height: 260px;
+  }
+}
+
 /* =========================
    FORM SUCCESS MESSAGE
 ========================= */

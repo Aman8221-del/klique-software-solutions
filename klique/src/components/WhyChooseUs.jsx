@@ -12,7 +12,7 @@ function WhyChooseUs() {
             <h2>Why we're the software partner you're looking for</h2>
           </div>
           <div className="why-header-right">
-            Great things cannot be achieved by impulse but through a series of actions executed in the best way.
+            We follow the same disciplined process on every engagement, from the first conversation through to final delivery.
           </div>
         </div>
 
@@ -20,22 +20,22 @@ function WhyChooseUs() {
           <div className={`why-card ${isVisible ? 'animate-in' : ''}`} style={{ transitionDelay: '0.15s' }}>
             <div className="why-step-num">01</div>
             <h3>Hear it</h3>
-            <p>We are modeling the behaviors you are looking for.</p>
+            <p>We start by listening, understanding your goals, constraints, and what success needs to look like.</p>
           </div>
           <div className={`why-card ${isVisible ? 'animate-in' : ''}`} style={{ transitionDelay: '0.3s' }}>
             <div className="why-step-num">02</div>
             <h3>Ask</h3>
-            <p>We gather information using an online tool during a scrum, stand-up, or meeting call.</p>
+            <p>We work through the details together in structured stand-ups, scoping calls, and planning sessions.</p>
           </div>
           <div className={`why-card ${isVisible ? 'animate-in' : ''}`} style={{ transitionDelay: '0.45s' }}>
             <div className="why-step-num">03</div>
             <h3>Build</h3>
-            <p>Our software component is built to provide certain functionality and give a specified level of service.</p>
+            <p>We build each component against a clear specification, so it does what it's meant to and holds up in production.</p>
           </div>
           <div className={`why-card ${isVisible ? 'animate-in' : ''}`} style={{ transitionDelay: '0.6s' }}>
             <div className="why-step-num">04</div>
             <h3>Deliver</h3>
-            <p>The discipline of planning, executing, and managing resources to complete deliverables within budget and time.</p>
+            <p>We manage timelines and resources carefully, so what we deliver lands on schedule and within budget.</p>
           </div>
         </div>
       </div>

@@ -434,7 +434,7 @@ function App() {
                 {/* Dropdown Menu for Services */}
                 {item.hasDropdown && (
                   <div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[600px] p-4 rounded-2xl bg-white shadow-2xl transition-all duration-300 origin-top z-[999] before:absolute before:-top-6 before:left-0 before:w-full before:h-6 ${
+                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[600px] max-w-[92vw] p-4 rounded-2xl bg-white shadow-2xl transition-all duration-300 origin-top z-[999] before:absolute before:-top-6 before:left-0 before:w-full before:h-6 ${
                       isServicesOpen
                         ? "opacity-100 scale-100 pointer-events-auto visible"
                         : "opacity-0 scale-95 pointer-events-none invisible"

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import ApplyFormPage from "./ApplyFormPage";
 
 function CareerPage({ onContactClick }) {
   const [jobs, setJobs] = useState([]);
@@ -8,13 +9,8 @@ function CareerPage({ onContactClick }) {
   const [searchType, setSearchType] = useState("All types");
   const [searchCategory, setSearchCategory] = useState("All categories");
 
-  // Application Modal States
+  // Application Modal State
   const [activeJob, setActiveJob] = useState(null);
-  const [applicantName, setApplicantName] = useState("");
-  const [applicantEmail, setApplicantEmail] = useState("");
-  const [applicantResume, setApplicantResume] = useState(null);
-  const [applicantMessage, setApplicantMessage] = useState("");
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   // Scroll to top on mount
   useEffect(() => {
@@ -88,55 +84,6 @@ function CareerPage({ onContactClick }) {
     setSearchLocation("");
     setSearchType("All types");
     setSearchCategory("All categories");
-  };
-
-  const handleApplySubmit = async (e) => {
-    e.preventDefault();
-
-    if (!applicantResume) {
-      alert("Please select your resume.");
-      return;
-    }
-
-    const formData = new FormData();
-
-    formData.append("jobId", activeJob._id);
-    formData.append("name", applicantName);
-    formData.append("email", applicantEmail);
-    formData.append("message", applicantMessage);
-    formData.append("resume", applicantResume);
-
-    try {
-      const response = await fetch(
-        "https://klique-software-solutions.onrender.com/api/applications/apply",
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Failed to submit application");
-      }
-
-      console.log("Application submitted:", result);
-
-      setFormSubmitted(true);
-
-      setTimeout(() => {
-        setFormSubmitted(false);
-        setActiveJob(null);
-        setApplicantName("");
-        setApplicantEmail("");
-        setApplicantResume(null);
-        setApplicantMessage("");
-      }, 2500);
-    } catch (error) {
-      console.error("Application failed:", error);
-      alert(error.message || "Failed to submit application. Please try again.");
-    }
   };
 
   const scrollToJobs = () => {
@@ -558,10 +505,10 @@ function CareerPage({ onContactClick }) {
         </button>
       </section>
 
-      {/* APPLY MODAL OVERLAY */}
+      {/* APPLY MODAL OVERLAY — reuses the same ApplyFormPage component/card used from the footer Career links, unwrapped so the card renders at its exact original size */}
       {activeJob && (
         <div className="career-modal-overlay">
-          <div className="career-modal">
+          <div className="career-apply-shell">
             <button
               onClick={() => setActiveJob(null)}
               className="career-modal-close"
@@ -569,76 +516,12 @@ function CareerPage({ onContactClick }) {
               &times;
             </button>
 
-            <h3>Apply for {activeJob.title}</h3>
-            <p className="career-modal-subtitle">
-              {activeJob.department} &middot; {activeJob.location}
-            </p>
-
-            {formSubmitted ? (
-              <div className="career-modal-success">
-                <span className="icon">✓</span>
-                <h4>Application Submitted!</h4>
-                <p>
-                  Thank you. Our HR team will review your application and reach
-                  out shortly.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleApplySubmit} className="career-modal-form">
-                <div className="blog-floating-group">
-                  <input
-                    type="text"
-                    required
-                    value={applicantName}
-                    onChange={(e) => setApplicantName(e.target.value)}
-                    placeholder=" "
-                    className="blog-floating-input"
-                  />
-                  <label className="blog-floating-label">Full Name*</label>
-                </div>
-
-                <div className="blog-floating-group">
-                  <input
-                    type="email"
-                    required
-                    value={applicantEmail}
-                    onChange={(e) => setApplicantEmail(e.target.value)}
-                    placeholder=" "
-                    className="blog-floating-input"
-                  />
-                  <label className="blog-floating-label">Email Address*</label>
-                </div>
-
-                <div className="blog-floating-group">
-                  <input
-                    type="file"
-                    required
-                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    onChange={(e) => setApplicantResume(e.target.files[0])}
-                    className="blog-floating-input"
-                  />
-
-                  <label className="blog-floating-label">Upload Resume*</label>
-                </div>
-
-                <div className="blog-floating-group">
-                  <textarea
-                    rows={4}
-                    value={applicantMessage}
-                    onChange={(e) => setApplicantMessage(e.target.value)}
-                    placeholder=" "
-                    className="blog-floating-textarea"
-                  />
-                  <label className="blog-floating-label">
-                    Why should we hire you?
-                  </label>
-                </div>
-
-                <button type="submit" className="career-modal-submit-btn">
-                  Submit Application
-                </button>
-              </form>
-            )}
+            <ApplyFormPage
+              key={activeJob._id}
+              jobId={activeJob._id}
+              subject={activeJob.title}
+              embedded
+            />
           </div>
         </div>
       )}

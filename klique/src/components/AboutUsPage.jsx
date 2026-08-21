@@ -37,8 +37,8 @@ function AboutUsPage() {
 
           <div className="bento-card dark reveal">
             <div className="card-eyebrow">Our approach</div>
-            <h3>Cutting-edge, best-in-class solutions</h3>
-            <p>Our products and services help clients maximise growth, supported by the most recent technology and a genuine commitment to their success.</p>
+            <h3>Outcome-first, not trend-first</h3>
+            <p>We build for the result our clients need, not just what's popular in software right now. That focus, backed by a genuine commitment to getting it right, is what our long-term client relationships are built on.</p>
           </div>
         </div>
       </section>
@@ -92,7 +92,7 @@ function AboutUsPage() {
             <div className="vm-card-body">
               <div className="card-eyebrow">Our mission</div>
               <h3>Our mission statement</h3>
-              <p>We want to transform an environment where developers offer robotic, simple fixes without regard for the end-user. Along with our specialised Salesforce solutions, we make a strong effort to restore empathy and compassion to how software gets built.</p>
+              <p>Software development can become mechanical: a fix that technically works but ignores the person on the other end. We built Klique to work the other way, so every Salesforce solution we deliver genuinely serves the people who use it, not just the spec it was written against.</p>
             </div>
           </div>
         </div>

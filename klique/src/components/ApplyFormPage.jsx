@@ -1,13 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 import './ApplyFormPage.css';
 
-function ApplyFormPage({ role = 'trainer' }) {
+function ApplyFormPage({ role = 'trainer', jobId = null, subject = null, embedded = false }) {
   const [fileName, setFileName] = useState('');
   const [dragActive, setDragActive] = useState(false);
   const fileInputRef = useRef(null);
 
   // Capitalize role for display
   const displayRole = role.charAt(0).toUpperCase() + role.slice(1);
+
+  const [applicantName, setApplicantName] = useState('');
+  const [applicantPhone, setApplicantPhone] = useState('');
+  const [applicantEmail, setApplicantEmail] = useState('');
+  const [applicantSubject, setApplicantSubject] = useState(subject || displayRole);
+  const [applicantMessage, setApplicantMessage] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,8 +59,65 @@ function ApplyFormPage({ role = 'trainer' }) {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const resumeFile = fileInputRef.current?.files?.[0];
+
+    if (!resumeFile) {
+      alert('Please select your resume.');
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append('name', applicantName);
+    formData.append('email', applicantEmail);
+    formData.append('phone', applicantPhone);
+    formData.append('position', applicantSubject);
+    formData.append('message', applicantMessage);
+    formData.append('resume', resumeFile);
+    if (jobId) {
+      formData.append('jobId', jobId);
+    }
+
+    setSubmitting(true);
+
+    try {
+      const response = await fetch(
+        'https://klique-software-solutions.onrender.com/api/applications/apply',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      );
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to submit application');
+      }
+
+      setFormSubmitted(true);
+      setApplicantName('');
+      setApplicantPhone('');
+      setApplicantEmail('');
+      setApplicantSubject(subject || displayRole);
+      setApplicantMessage('');
+      setFileName('');
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (error) {
+      console.error('Application failed:', error);
+      alert(error.message || 'Failed to submit application. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
-    <div className="apply-page-wrapper">
+    <div className={`apply-page-wrapper${embedded ? ' embedded' : ''}`}>
       <div className="form-card">
         <div className="form-header">
           <span className="eyebrow">
@@ -65,26 +130,58 @@ function ApplyFormPage({ role = 'trainer' }) {
           <p>Fill in your details and we'll get back to you within 3–5 working days.</p>
         </div>
 
-        <form className="form-body" onSubmit={(e) => e.preventDefault()}>
+        {formSubmitted ? (
+          <div className="form-body">
+            <div className="apply-success">
+              <span className="apply-success-icon">✓</span>
+              <h4>Application Submitted!</h4>
+              <p>Thank you. Our HR team will review your application and reach out shortly.</p>
+            </div>
+          </div>
+        ) : (
+        <form className="form-body" onSubmit={handleSubmit}>
           <div className="field-group">
             <div className="field">
               <label>Full Name <span className="req">*</span></label>
-              <input type="text" placeholder="Your full name" required />
+              <input
+                type="text"
+                placeholder="Your full name"
+                required
+                value={applicantName}
+                onChange={(e) => setApplicantName(e.target.value)}
+              />
             </div>
             <div className="field">
               <label>Phone Number</label>
-              <input type="text" placeholder="+91 00000 00000" />
+              <input
+                type="text"
+                placeholder="+91 00000 00000"
+                value={applicantPhone}
+                onChange={(e) => setApplicantPhone(e.target.value)}
+              />
             </div>
           </div>
 
           <div className="field-group">
             <div className="field">
               <label>Email <span className="req">*</span></label>
-              <input type="email" placeholder="you@example.com" required />
+              <input
+                type="email"
+                placeholder="you@example.com"
+                required
+                value={applicantEmail}
+                onChange={(e) => setApplicantEmail(e.target.value)}
+              />
             </div>
             <div className="field">
               <label>Subject <span className="req">*</span></label>
-              <input type="text" placeholder="Position you're applying for" required defaultValue={displayRole} />
+              <input
+                type="text"
+                placeholder="Position you're applying for"
+                required
+                value={applicantSubject}
+                onChange={(e) => setApplicantSubject(e.target.value)}
+              />
             </div>
           </div>
 
@@ -127,11 +224,15 @@ function ApplyFormPage({ role = 'trainer' }) {
 
           <div className="field" style={{ marginBottom: 0 }}>
             <label>Your Message (optional)</label>
-            <textarea placeholder="Tell us a bit about yourself..."></textarea>
+            <textarea
+              placeholder="Tell us a bit about yourself..."
+              value={applicantMessage}
+              onChange={(e) => setApplicantMessage(e.target.value)}
+            ></textarea>
           </div>
 
-          <button className="submit-btn" type="submit">
-            Submit Application
+          <button className="submit-btn" type="submit" disabled={submitting}>
+            {submitting ? 'Submitting...' : 'Submit Application'}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
@@ -139,6 +240,7 @@ function ApplyFormPage({ role = 'trainer' }) {
 
           <p className="privacy-note">Your information is kept confidential and used only for this application.</p>
         </form>
+        )}
       </div>
     </div>
   );

@@ -7,16 +7,23 @@ const cloudinary = require("../config/cloudinary");
 // ==========================================
 const applyForJob = async (req, res) => {
   try {
-    const { jobId, name, email, message } = req.body;
+    const { jobId, name, email, message, phone, position } = req.body;
 
     console.log("BODY:", req.body);
     console.log("FILE:", req.file);
 
     // Required fields
-    if (!jobId || !name || !email) {
+    if (!name || !email) {
       return res.status(400).json({
         success: false,
-        message: "Job ID, name and email are required",
+        message: "Name and email are required",
+      });
+    }
+
+    if (!jobId && !position) {
+      return res.status(400).json({
+        success: false,
+        message: "Job ID or position is required",
       });
     }
 
@@ -28,14 +35,16 @@ const applyForJob = async (req, res) => {
       });
     }
 
-    // Check job exists
-    const job = await Job.findById(jobId);
+    // Check job exists (only when applying to a specific posted job)
+    if (jobId) {
+      const job = await Job.findById(jobId);
 
-    if (!job) {
-      return res.status(404).json({
-        success: false,
-        message: "Job not found",
-      });
+      if (!job) {
+        return res.status(404).json({
+          success: false,
+          message: "Job not found",
+        });
+      }
     }
 
     // Upload resume to Cloudinary
@@ -59,9 +68,11 @@ const applyForJob = async (req, res) => {
 
     // Save application
     const application = await Application.create({
-      job: jobId,
+      job: jobId || undefined,
+      position: position || "",
       name,
       email,
+      phone: phone || "",
       message,
       resumeUrl: uploadResult.secure_url,
       resumePublicId: uploadResult.public_id,

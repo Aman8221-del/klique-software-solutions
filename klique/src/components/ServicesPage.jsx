@@ -19,9 +19,9 @@ function ServicesPage() {
       <div className="services-hero">
         <div className="services-hero-content">
           <span className="eyebrow reveal">Our Expertise</span>
-          <h1 className="reveal" style={{ transitionDelay: '0.1s' }}>Transforming Visions into Digital Reality</h1>
+          <h1 className="reveal" style={{ transitionDelay: '0.1s' }}>Technology Services Built Around Your Business</h1>
           <p className="reveal" style={{ transitionDelay: '0.2s' }}>
-            From intelligent cloud solutions to data-driven insights, we deliver world-class technology services that accelerate your business growth.
+            From Salesforce and data analytics to web development, SEO, and social media, we deliver technology services shaped around what your business actually needs.
           </p>
         </div>
       </div>
@@ -39,11 +39,11 @@ function ServicesPage() {
           {/* Right Text Area */}
           <div className="specialties-text-wrap reveal-r">
             <span className="eyebrow">Work With Us</span>
-            <h2>Mastering the Digital Landscape</h2>
+            <h2>What We Bring to Every Engagement</h2>
             <p>
-              Klique is your premier destination for enterprise-grade solutions. Whether it's end-to-end Salesforce Implementation, robust Development, Strategic Consulting, or comprehensive Managed Services, we have the expertise to elevate your operations.
+              Klique works with clients on everything from end-to-end Salesforce implementation and custom development to strategic consulting and ongoing managed services, bringing the same level of care to a single project as to a full technology roadmap.
             </p>
-            
+
             <div className="specialties-features">
               <div className="feature-item">
                 <div className="feature-icon">
@@ -51,7 +51,7 @@ function ServicesPage() {
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </div>
-                Tailored Enterprise Solutions
+                Solutions Tailored to Your Business
               </div>
               <div className="feature-item">
                 <div className="feature-icon">
@@ -67,7 +67,7 @@ function ServicesPage() {
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </div>
-                Data-Driven Strategies
+                Decisions Backed by Data
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@ function ServicesPage() {
               </svg>
             </div>
             <h3>Salesforce Solutions</h3>
-            <p>Unlock the full potential of your CRM with our custom Salesforce implementation, optimization, and development strategies.</p>
+            <p>We help you get more from your CRM through custom Salesforce implementation, optimization, and ongoing development support.</p>
             <a href="/service/salesforce" onClick={(e) => handleLinkClick(e, '/service/salesforce')} className="read-more-btn">
               Discover More
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -113,7 +113,7 @@ function ServicesPage() {
               </svg>
             </div>
             <h3>Data Analytics</h3>
-            <p>Transform raw data into actionable intelligence. We build powerful analytics dashboards that drive informed decision-making.</p>
+            <p>We turn raw data into dashboards your team can actually use, built to support faster, better-informed decisions.</p>
             <a href="/service/data-analytics" onClick={(e) => handleLinkClick(e, '/service/data-analytics')} className="read-more-btn">
               Discover More
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -133,7 +133,7 @@ function ServicesPage() {
               </svg>
             </div>
             <h3>Web & App Development</h3>
-            <p>Crafting stunning, high-performance websites and intuitive mobile applications tailored to captivate your audience.</p>
+            <p>We design and build fast, reliable websites and mobile apps tailored to your business and the people who use them.</p>
             <a href="/service/website-app-development" onClick={(e) => handleLinkClick(e, '/service/website-app-development')} className="read-more-btn">
               Discover More
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -153,7 +153,7 @@ function ServicesPage() {
               </svg>
             </div>
             <h3>Search Engine Optimization</h3>
-            <p>Dominate search rankings. Our cutting-edge SEO strategies ensure your brand is always found by the right people.</p>
+            <p>We help your brand rank where it matters, with SEO strategies built around how your customers actually search.</p>
             <a href="/service/seo" onClick={(e) => handleLinkClick(e, '/service/seo')} className="read-more-btn">
               Discover More
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -172,7 +172,7 @@ function ServicesPage() {
               </svg>
             </div>
             <h3>Social Media Management</h3>
-            <p>Engage, grow, and convert. We manage your online presence with compelling content and strategic community building.</p>
+            <p>We manage your social presence end-to-end, content, community, and growth, so your brand stays active and consistent.</p>
             <a href="/service/social-media-management" onClick={(e) => handleLinkClick(e, '/service/social-media-management')} className="read-more-btn">
               Discover More
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -194,7 +194,7 @@ function ServicesPage() {
               </svg>
             </div>
             <h3>PDF Remediation</h3>
-            <p>Ensure universal digital accessibility. We specialize in making your documents fully compliant with modern accessibility standards.</p>
+            <p>We make your documents accessible to everyone, bringing them in line with current digital accessibility standards.</p>
             <a href="/service/pdf-remediation" onClick={(e) => handleLinkClick(e, '/service/pdf-remediation')} className="read-more-btn">
               Discover More
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
