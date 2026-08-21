@@ -59,8 +59,15 @@ function ApplyFormPage({ role = 'trainer', jobId = null, subject = null, embedde
     }
   };
 
+  const INDIAN_MOBILE_REGEX = /^[6-9][0-9]{9}$/;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!INDIAN_MOBILE_REGEX.test(applicantPhone.trim())) {
+      alert('Please enter a valid 10-digit mobile number.');
+      return;
+    }
 
     const resumeFile = fileInputRef.current?.files?.[0];
 
@@ -157,6 +164,9 @@ function ApplyFormPage({ role = 'trainer', jobId = null, subject = null, embedde
                 type="text"
                 placeholder="+91 00000 00000"
                 required
+                pattern="[6-9][0-9]{9}"
+                title="Please enter a valid 10-digit mobile number."
+                maxLength={10}
                 value={applicantPhone}
                 onChange={(e) => setApplicantPhone(e.target.value)}
               />

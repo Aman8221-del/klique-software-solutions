@@ -20,6 +20,14 @@ const applyForJob = async (req, res) => {
       });
     }
 
+    // Phone number validation (Indian 10-digit mobile number)
+    if (!/^[6-9][0-9]{9}$/.test(String(phone).trim())) {
+      return res.status(400).json({
+        success: false,
+        message: "Please enter a valid 10-digit mobile number.",
+      });
+    }
+
     if (!jobId && !position) {
       return res.status(400).json({
         success: false,
