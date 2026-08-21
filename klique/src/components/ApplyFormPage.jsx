@@ -152,10 +152,11 @@ function ApplyFormPage({ role = 'trainer', jobId = null, subject = null, embedde
               />
             </div>
             <div className="field">
-              <label>Phone Number</label>
+              <label>Phone Number <span className="req">*</span></label>
               <input
                 type="text"
                 placeholder="+91 00000 00000"
+                required
                 value={applicantPhone}
                 onChange={(e) => setApplicantPhone(e.target.value)}
               />

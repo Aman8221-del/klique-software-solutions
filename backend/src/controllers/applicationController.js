@@ -13,10 +13,10 @@ const applyForJob = async (req, res) => {
     console.log("FILE:", req.file);
 
     // Required fields
-    if (!name || !email) {
+    if (!name || !phone || !email || !req.file) {
       return res.status(400).json({
         success: false,
-        message: "Name and email are required",
+        message: "Name, phone, email and resume are required.",
       });
     }
 
@@ -24,14 +24,6 @@ const applyForJob = async (req, res) => {
       return res.status(400).json({
         success: false,
         message: "Job ID or position is required",
-      });
-    }
-
-    // Resume check
-    if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: "Resume is required",
       });
     }
 
