@@ -1,62 +1,63 @@
-import service1 from '../assets/salesforce/sevices1.jpg';
-import service2 from '../assets/salesforce/service2.jpg';
+import bannerImg from '../assets/Managed Services/social-media-management.jpg';
 import { usePageReveal } from '../hooks/useRevealOnScroll';
+import ServiceIcon from './ServiceIcon';
+
+const CATEGORIES = [
+  { icon: 'calendar', title: 'Content Creation & Scheduling', desc: 'A consistent posting calendar with content built for each platform.' },
+  { icon: 'message-circle', title: 'Community Management', desc: 'Responding to comments and messages so your audience feels heard.' },
+  { icon: 'target', title: 'Paid Social Campaigns', desc: 'Targeted ad campaigns designed to reach the right audience.' },
+  { icon: 'users', title: 'Influencer Collaboration', desc: 'Partnering with creators to extend your brand\'s reach.' },
+  { icon: 'bar-chart-2', title: 'Social Analytics & Reporting', desc: 'Clear reporting on what\'s working, and what to adjust.' },
+  { icon: 'award', title: 'Brand Strategy', desc: 'A consistent voice and visual identity across every platform.' },
+];
 
 function SocialMediaManagementPage() {
   usePageReveal('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
 
   return (
     <div className="service-page-wrapper w-full bg-[#f6f8fb]">
-      {/* Banner */}
       <div
         className="page-banner"
-        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${service1})` }}
+        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${bannerImg})` }}
       >
         <h1>Social Media Management</h1>
       </div>
 
       <div className="service-layout">
-        {/* Main content */}
         <div className="main-content">
           <div className="section-eyebrow reveal">Our services</div>
           <h2 className="service-section-title reveal">Social Media Management</h2>
 
-          {/* Intro row */}
-          <div className="intro-row">
-            <div className="intro-img-wrap reveal-l">
-              <img src={service2} alt="Social Media" loading="lazy" />
-            </div>
-            <div className="intro-text reveal-r">
-              <p className="service-lede" style={{ marginBottom: 'var(--space-4)' }}>
-                We understand that social media can be overwhelming and time-consuming, especially for businesses and individuals with a busy schedule. That's why we're here to help. Our team of experienced social media experts will manage your accounts for you, freeing up your time and allowing you to focus on other important tasks.
-              </p>
-              <p className="service-lede">
-                We'll handle everything from creating and scheduling posts, to engaging with your followers and monitoring your analytics. Our goal is to increase your social media presence, build brand awareness, and ultimately drive traffic to your website.
-              </p>
-            </div>
+          <p className="service-lede reveal">
+            We manage your social presence end-to-end — content, community, and campaigns — so you can focus on running your business.
+          </p>
+
+          <div className="service-divider reveal"></div>
+
+          <h3 className="service-subhead reveal">What we manage</h3>
+          <div className="service-feature-list">
+            {CATEGORIES.map((cat, idx) => (
+              <div
+                className="service-feature-item reveal"
+                style={{ transitionDelay: `${idx * 0.08}s` }}
+                key={cat.title}
+              >
+                <div className="f-icon"><ServiceIcon name={cat.icon} /></div>
+                <div>
+                  <h4>{cat.title}</h4>
+                  <p>{cat.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="service-block reveal">
-            <p className="service-body">
-              We work with a variety of platforms, including Facebook, Twitter, Instagram, and LinkedIn, and will customize our strategy to meet the specific needs of your business. Whether you're looking to reach a new audience, build your following, or simply save time, our social media management service has got you covered.
-            </p>
-          </div>
+          <p className="service-body reveal" style={{ marginTop: 'var(--space-8)' }}>
+            From a content calendar to paid campaigns, we build a social strategy consistent with how your brand actually sounds.
+          </p>
 
-          {/* Image pair */}
-          <div className="img-pair">
-            <div className="img-pair-item reveal-l">
-              <img src={service2} alt="Social Media 1" loading="lazy" />
-            </div>
-            <div className="img-pair-item reveal-r">
-              <img src={service1} alt="Social Media 2" loading="lazy" />
-            </div>
-          </div>
-
-          <div className="service-block reveal">
-            <p className="service-body">
-              So why wait? Let us take the reins of your social media accounts and help you achieve your online goals. Contact us today to learn more about our services and how we can help your business succeed on social media!
-            </p>
-          </div>
+          <a href="/contact-us" className="service-cta-btn reveal">
+            Get in touch &rarr;
+          </a>
         </div>
 
         {/* Sidebar */}

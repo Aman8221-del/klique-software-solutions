@@ -1,64 +1,63 @@
-import service1 from '../assets/salesforce/sevices1.jpg';
-import service2 from '../assets/salesforce/service2.jpg';
+import bannerImg from '../assets/Managed Services/pdf-remediation.jpg';
 import { usePageReveal } from '../hooks/useRevealOnScroll';
+import ServiceIcon from './ServiceIcon';
+
+const CATEGORIES = [
+  { icon: 'check-square', title: 'Accessibility Audits (WCAG/508)', desc: 'A full review of your documents against WCAG and Section 508 standards.' },
+  { icon: 'tag', title: 'Tagging & Structure Remediation', desc: 'Correct heading structure and semantic tags for screen readers.' },
+  { icon: 'image', title: 'Alt Text & Image Descriptions', desc: 'Meaningful descriptions added to every image and graphic.' },
+  { icon: 'edit-3', title: 'Form Field Accessibility', desc: 'Interactive PDF forms made fully usable with assistive technology.' },
+  { icon: 'layers', title: 'Batch Document Remediation', desc: 'Remediate large document libraries efficiently, at scale.' },
+  { icon: 'shield', title: 'Compliance Reporting', desc: 'Documentation showing exactly what was fixed and why.' },
+];
 
 function PDFRemediationPage() {
   usePageReveal('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
 
   return (
     <div className="service-page-wrapper w-full bg-[#f6f8fb]">
-      {/* Banner */}
       <div
         className="page-banner"
-        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${service1})` }}
+        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${bannerImg})` }}
       >
         <h1>PDF Remediation</h1>
       </div>
 
       <div className="service-layout">
-        {/* Main content */}
         <div className="main-content">
           <div className="section-eyebrow reveal">Our services</div>
           <h2 className="service-section-title reveal">PDF Remediation</h2>
 
-          {/* Intro row */}
-          <div className="intro-row">
-            <div className="intro-img-wrap reveal-l">
-              <img src={service2} alt="PDF Remediation" loading="lazy" />
-            </div>
-            <div className="intro-text reveal-r">
-              <p className="service-lede">
-                Klique provides a PDF remediation service that specialises in fixing accessibility issues in PDF documents to make them usable for people with disabilities.
-              </p>
-            </div>
+          <p className="service-lede reveal">
+            We make PDF documents accessible to everyone — fixing structure, tagging, and alt text so they work with screen readers and assistive technology.
+          </p>
+
+          <div className="service-divider reveal"></div>
+
+          <h3 className="service-subhead reveal">Remediation categories we cover</h3>
+          <div className="service-feature-list">
+            {CATEGORIES.map((cat, idx) => (
+              <div
+                className="service-feature-item reveal"
+                style={{ transitionDelay: `${idx * 0.08}s` }}
+                key={cat.title}
+              >
+                <div className="f-icon"><ServiceIcon name={cat.icon} /></div>
+                <div>
+                  <h4>{cat.title}</h4>
+                  <p>{cat.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="service-block reveal">
-            <h3 className="service-subhead">Our Services:</h3>
-            <p className="service-body" style={{ marginBottom: 'var(--space-4)' }}>
-              At Klique, we offer a wide range of products and services to cater to all your needs. Our services include:
-            </p>
-            <p className="service-body">
-              Klique uses a combination of software tools and manual processes to identify and fix any accessibility issues, such as missing alt text, incorrect heading structures, and more.
-            </p>
-          </div>
+          <p className="service-body reveal" style={{ marginTop: 'var(--space-8)' }}>
+            Whether it's a single document or a full library, our remediation work is built to meet WCAG and Section 508 standards.
+          </p>
 
-          <div className="service-block reveal">
-            <h3 className="service-subhead">Quality And Customer Satisfaction:</h3>
-            <p className="service-body">
-              The best PDF remediation service providers have a deep understanding of accessibility standards, such as the Web Content Accessibility Guidelines (WCAG), and use this knowledge to ensure that every document they work on is fully accessible. They also provide clear, concise reporting and documentation to help their clients understand the changes that were made and why they were made. Whether you are a large corporation, a government agency, or an individual, a PDF remediation service provider can help you ensure that your PDF documents are accessible to everyone, regardless of ability. So if you have PDF documents that need to be made accessible, consider partnering with a Klique PDF remediation service to get the job done right.
-            </p>
-          </div>
-
-          {/* Image pair */}
-          <div className="img-pair">
-            <div className="img-pair-item reveal-l">
-              <img src={service2} alt="PDF Remediation 1" loading="lazy" />
-            </div>
-            <div className="img-pair-item reveal-r">
-              <img src={service1} alt="PDF Remediation 2" loading="lazy" />
-            </div>
-          </div>
+          <a href="/contact-us" className="service-cta-btn reveal">
+            Get in touch &rarr;
+          </a>
         </div>
 
         {/* Sidebar */}

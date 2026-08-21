@@ -1,88 +1,63 @@
-import service1 from '../assets/salesforce/sevices1.jpg';
-import service2 from '../assets/salesforce/service2.jpg';
+import bannerImg from '../assets/Managed Services/data-analytics.jpg';
 import { usePageReveal } from '../hooks/useRevealOnScroll';
+import ServiceIcon from './ServiceIcon';
+
+const CATEGORIES = [
+  { icon: 'layout', title: 'Business Intelligence Dashboards', desc: 'Live, decision-ready dashboards pulling together your key metrics.' },
+  { icon: 'trending-up', title: 'Predictive Analytics', desc: 'Forecast trends and outcomes using historical data patterns.' },
+  { icon: 'database', title: 'Data Warehousing & ETL', desc: 'Consolidate data from multiple sources into one reliable pipeline.' },
+  { icon: 'activity', title: 'Real-Time Reporting', desc: 'Up-to-the-minute reporting instead of static, backward-looking reports.' },
+  { icon: 'users', title: 'Customer & Sales Analytics', desc: 'Understand buying behavior and sales performance in depth.' },
+  { icon: 'pie-chart', title: 'Data Visualization', desc: 'Turn complex datasets into charts and visuals anyone can read.' },
+];
 
 function DataAnalyticsServicePage() {
   usePageReveal('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
 
   return (
     <div className="service-page-wrapper w-full bg-[#f6f8fb]">
-      {/* Banner */}
       <div
         className="page-banner"
-        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${service1})` }}
+        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${bannerImg})` }}
       >
         <h1>Data Analytics</h1>
       </div>
 
       <div className="service-layout">
-        {/* Main content */}
         <div className="main-content">
           <div className="section-eyebrow reveal">Our services</div>
           <h2 className="service-section-title reveal">Data Analytics</h2>
 
-          {/* Intro row */}
-          <div className="intro-row">
-            <div className="intro-img-wrap reveal-l">
-              <img src={service2} alt="Data Analytics" loading="lazy" />
-            </div>
-            <div className="intro-text reveal-r">
-              <p className="service-lede">
-                Welcome to our website dedicated to Data Analytics! We are dedicated to providing comprehensive and in-depth information about the world of data analysis and how it can help businesses and organizations of all sizes make better decisions and drive success.
-              </p>
-            </div>
+          <p className="service-lede reveal">
+            We turn scattered data into dashboards and reports your team can actually act on — no more digging through spreadsheets for answers.
+          </p>
+
+          <div className="service-divider reveal"></div>
+
+          <h3 className="service-subhead reveal">Data analytics categories we cover</h3>
+          <div className="service-feature-list">
+            {CATEGORIES.map((cat, idx) => (
+              <div
+                className="service-feature-item reveal"
+                style={{ transitionDelay: `${idx * 0.08}s` }}
+                key={cat.title}
+              >
+                <div className="f-icon"><ServiceIcon name={cat.icon} /></div>
+                <div>
+                  <h4>{cat.title}</h4>
+                  <p>{cat.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="service-block reveal">
-            <h3 className="service-subhead">What Is Data Analytics?</h3>
-            <p className="service-body">
-              Data analytics refers to the process of analyzing, cleaning, transforming, and modeling data to discover useful information, draw conclusions, and support decision-making. The goal of data analytics is to provide organizations with actionable insights into their operations and help them make informed decisions that can improve their overall performance and bottom line.
-            </p>
-          </div>
+          <p className="service-body reveal" style={{ marginTop: 'var(--space-8)' }}>
+            From forecasting to reporting, our analytics work is built to answer the questions that actually move your business forward.
+          </p>
 
-          <div className="service-block reveal">
-            <h3 className="service-subhead">The Benefits Of Data Analytics</h3>
-            <p className="service-body" style={{ marginBottom: 'var(--space-4)' }}>
-              There are numerous benefits to using data analytics, including:
-            </p>
-            <ol className="service-list">
-              <li><strong>Improved Decision-Making:</strong> By analyzing data, organizations can gain a deeper understanding of their operations and make better-informed decisions that can improve their overall performance.</li>
-              <li><strong>Increased Efficiency:</strong> Data analytics can help organizations identify areas where they can improve their processes and increase efficiency, leading to a reduction in waste and a boost in productivity.</li>
-              <li><strong>Improved Customer Satisfaction:</strong> Data analytics can help organizations understand the needs and preferences of their customers, allowing them to tailor their offerings and improve customer satisfaction.</li>
-              <li><strong>Better Customer Insights:</strong> Data analytics can help organizations gain a deeper understanding of their customers and gain valuable insights into their behaviors, preferences, and buying habits.</li>
-              <li><strong>Competitive Advantage:</strong> By leveraging data analytics, organizations can stay ahead of the competition and gain a competitive advantage in their respective industries.</li>
-            </ol>
-          </div>
-
-          {/* Image pair */}
-          <div className="img-pair">
-            <div className="img-pair-item reveal-l">
-              <img src={service2} alt="Analytics 1" loading="lazy" />
-            </div>
-            <div className="img-pair-item reveal-r">
-              <img src={service1} alt="Analytics 2" loading="lazy" />
-            </div>
-          </div>
-
-          <div className="service-block reveal">
-            <h3 className="service-subhead">Data Analytics Techniques</h3>
-            <p className="service-body" style={{ marginBottom: 'var(--space-4)' }}>
-              There are a wide variety of data analytics techniques that organizations can use to analyze and make sense of their data. Some of the most popular techniques include:
-            </p>
-            <ol className="service-list">
-              <li><strong>Descriptive Analytics:</strong> This type of analytics focuses on describing and summarizing data to understand its characteristics and patterns.</li>
-              <li><strong>Predictive Analytics:</strong> Predictive analytics uses historical data to make predictions about future events or trends.</li>
-              <li><strong>Prescriptive Analytics:</strong> Prescriptive analytics combines descriptive and predictive analytics to provide recommendations on how organizations can improve their operations and achieve specific goals.</li>
-              <li><strong>Machine Learning:</strong> Machine learning is a type of artificial intelligence that uses algorithms and statistical models to analyze and make predictions about data.</li>
-            </ol>
-          </div>
-
-          <div className="service-block reveal">
-            <h3 className="service-subhead">Conclusion</h3>
-            <p className="service-body">
-              Data analytics has become increasingly important for businesses and organizations of all sizes, as it provides valuable insights into their operations and helps them make better-informed decisions. We hope this website provides you with a comprehensive understanding of data analytics and how it can benefit your organization.
-            </p>
-          </div>
+          <a href="/contact-us" className="service-cta-btn reveal">
+            Get in touch &rarr;
+          </a>
         </div>
 
         {/* Sidebar */}

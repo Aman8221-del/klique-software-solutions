@@ -335,6 +335,20 @@ function App() {
     },
   ];
 
+  // Views whose top section is a dark banner/hero: transparent header text needs
+  // to switch to white there before scrolling, or it disappears into the banner.
+  const DARK_BANNER_VIEWS = [
+    "career",
+    "contact",
+    "services",
+    "privacy-policy",
+    "terms-conditions",
+    "cookie-policy",
+  ];
+  const isDarkBanner =
+    DARK_BANNER_VIEWS.includes(currentView) || currentView.startsWith("service-");
+  const navOnDark = isDarkBanner && !scrolled;
+
   return (
     <div className="min-h-screen text-slate-900 flex flex-col font-sans selection:bg-blue-600">
       {/* Navigation Header */}
@@ -356,7 +370,9 @@ function App() {
             <img
               src={logo}
               alt="Klique Software Solutions"
-              className="h-14 sm:h-16 md:h-16 w-auto object-contain scale-[1.8] origin-left"
+              className={`h-14 sm:h-16 md:h-16 w-auto object-contain scale-[1.8] origin-left transition-all duration-300 ${
+                navOnDark ? "drop-shadow-[0_0_6px_rgba(255,255,255,0.9)]" : ""
+              }`}
             />
           </a>
 
@@ -374,11 +390,13 @@ function App() {
                 {item.hasDropdown ? (
                   <button
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center gap-1.5 px-4 py-1.5 rounded-full  font-bold text-black hover:text-[#0d5fd4] transition-all duration-200 hover:bg-slate-100/50"
+                    className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full font-bold hover:text-[#0d5fd4] transition-all duration-200 hover:bg-slate-100/50 ${
+                      navOnDark ? "text-white" : "text-black"
+                    }`}
                   >
                     {item.name}
                     <svg
-                      className={`w-3.5 h-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180 text-[#0d5fd4]" : "text-slate-500"}`}
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180 text-[#0d5fd4]" : navOnDark ? "text-white/70" : "text-slate-500"}`}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -395,7 +413,7 @@ function App() {
                   <a
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className={`block px-4 py-1.5 rounded-full text-black  font-bold transition-all duration-200 hover:bg-slate-100/50 ${
+                    className={`block px-4 py-1.5 rounded-full font-bold transition-all duration-200 hover:bg-slate-100/50 ${
                       (item.href === "/about-us" && currentView === "about") ||
                       (item.href === "/blog" && currentView === "blog") ||
                       (item.href === "/careers" && currentView === "career") ||
@@ -404,7 +422,9 @@ function App() {
                       ((item.href === "/" || item.href === "#home") &&
                         currentView === "home")
                         ? "text-[#0d5fd4] font-semibold bg-slate-100/80"
-                        : "text-slate-700 hover:text-[#0d5fd4]"
+                        : navOnDark
+                          ? "text-white hover:text-[#0d5fd4]"
+                          : "text-slate-700 hover:text-[#0d5fd4]"
                     }`}
                   >
                     {item.name}
@@ -700,7 +720,7 @@ function App() {
             <AboutSection onLinkClick={handleNavClick} />
 
             {/* Managed Services Section */}
-            <ManagedServices />
+            <ManagedServices onLinkClick={handleNavClick} />
 
             {/* Why Choose Us Section */}
             <WhyChooseUs />

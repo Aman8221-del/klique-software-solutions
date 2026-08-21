@@ -1,6 +1,17 @@
-import service1 from '../assets/salesforce/sevices1.jpg';
-import service2 from '../assets/salesforce/service2.jpg';
+import bannerImg from '../assets/Managed Services/salesforce.jpg';
 import { usePageReveal } from '../hooks/useRevealOnScroll';
+import ServiceIcon from './ServiceIcon';
+
+const CATEGORIES = [
+  { icon: 'trending-up', title: 'Sales Cloud', desc: 'Drive sales productivity and pipeline growth.' },
+  { icon: 'headphones', title: 'Service Cloud', desc: 'Deliver connected, intelligent customer service.' },
+  { icon: 'globe', title: 'Experience Cloud', desc: 'Build secure customer and partner experiences.' },
+  { icon: 'file-text', title: 'Revenue Cloud & CPQ', desc: 'Streamline product configuration, pricing, quoting and revenue.' },
+  { icon: 'truck', title: 'Field Service', desc: 'Optimize field operations, scheduling and workforce management.' },
+  { icon: 'shield', title: 'Financial Services Cloud', desc: 'Deliver connected experiences for financial services organizations.' },
+  { icon: 'heart', title: 'Health Cloud', desc: 'Connect patients, providers and healthcare journeys.' },
+  { icon: 'shopping-cart', title: 'Commerce Cloud', desc: 'Build scalable B2B and B2C commerce experiences.' },
+];
 
 function SalesforceServicePage() {
   usePageReveal('.service-page-wrapper .reveal, .service-page-wrapper .reveal-l, .service-page-wrapper .reveal-r');
@@ -9,104 +20,46 @@ function SalesforceServicePage() {
     <div className="service-page-wrapper w-full bg-[#f6f8fb]">
       <div
         className="page-banner"
-        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${service1})` }}
+        style={{ backgroundImage: `linear-gradient(rgba(11,12,16,0.6), rgba(11,12,16,0.55)), url(${bannerImg})` }}
       >
         <h1>Salesforce</h1>
       </div>
 
       <div className="service-layout">
-        {/* Main content */}
         <div className="main-content">
           <div className="section-eyebrow reveal">Our services</div>
           <h2 className="service-section-title reveal">Salesforce</h2>
 
-          {/* Intro row */}
-          <div className="intro-row">
-            <div className="intro-img-wrap reveal-l">
-              <img src={service2} alt="Salesforce" loading="lazy" />
-              <div className="img-label">Salesforce is a cloud-based</div>
-            </div>
-            <div className="intro-text reveal-r">
-              <p className="service-lede">Salesforce is a cloud-based customer relationship management (CRM) platform that offers a range of tools and applications to help businesses manage their sales, customer service, marketing, and more. Some key features of Salesforce include:</p>
-            </div>
-          </div>
+          <p className="service-lede reveal">
+            Salesforce is the world's leading CRM platform — built to manage your sales pipeline, customer service, and marketing in one connected system. We implement and customize it around how your team actually works.
+          </p>
 
           <div className="service-divider reveal"></div>
 
-          {/* Feature grid */}
+          <h3 className="service-subhead reveal">Salesforce solutions we work with</h3>
           <div className="service-feature-list">
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0s' }}>
-              <div className="f-icon">📋</div>
-              <div>
-                <h4>Contact management</h4>
-                <p>Store and manage all customer information in one central location.</p>
+            {CATEGORIES.map((cat, idx) => (
+              <div
+                className="service-feature-item reveal"
+                style={{ transitionDelay: `${idx * 0.08}s` }}
+                key={cat.title}
+              >
+                <div className="f-icon"><ServiceIcon name={cat.icon} /></div>
+                <div>
+                  <h4>{cat.title}</h4>
+                  <p>{cat.desc}</p>
+                </div>
               </div>
-            </div>
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0.1s' }}>
-              <div className="f-icon">🎯</div>
-              <div>
-                <h4>Lead and opportunity management</h4>
-                <p>Track the entire sales process from lead to close.</p>
-              </div>
-            </div>
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0.2s' }}>
-              <div className="f-icon">📈</div>
-              <div>
-                <h4>Sales forecasting</h4>
-                <p>Get a clear picture of future sales performance with sales forecasting.</p>
-              </div>
-            </div>
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0.3s' }}>
-              <div className="f-icon">⚙️</div>
-              <div>
-                <h4>Marketing automation</h4>
-                <p>Automate and measure the effectiveness of marketing campaigns.</p>
-              </div>
-            </div>
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0.4s' }}>
-              <div className="f-icon">🎧</div>
-              <div>
-                <h4>Customer service</h4>
-                <p>Streamline customer service with case management, knowledge base, and community tools.</p>
-              </div>
-            </div>
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0.5s' }}>
-              <div className="f-icon">💬</div>
-              <div>
-                <h4>Collaboration and productivity</h4>
-                <p>Enhance team collaboration with Chatter, Salesforce mobile app, and more.</p>
-              </div>
-            </div>
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0.6s' }}>
-              <div className="f-icon">📊</div>
-              <div>
-                <h4>Analytics and reporting</h4>
-                <p>Gain insights into your business with robust reporting and analytics capabilities.</p>
-              </div>
-            </div>
-            <div className="service-feature-item reveal" style={{ transitionDelay: '0.7s' }}>
-              <div className="f-icon">🔗</div>
-              <div>
-                <h4>Integration and customization</h4>
-                <p>Easily integrate with other systems and customize the platform to meet your unique needs.</p>
-              </div>
-            </div>
+            ))}
           </div>
 
-          {/* Image pair */}
-          <div className="img-pair">
-            <div className="img-pair-item reveal-l">
-              <img src={service2} alt="Team working" loading="lazy" />
-            </div>
-            <div className="img-pair-item reveal-r">
-              <img src={service1} alt="Office meeting" loading="lazy" />
-            </div>
-          </div>
+          <p className="service-body reveal" style={{ marginTop: 'var(--space-8)' }}>
+            Every engagement includes contact and pipeline management, reporting and analytics, and integration with the systems you already use — so Salesforce fits your business, not the other way around.
+          </p>
 
-          {/* Summary card */}
-          <div className="service-summary-card reveal">
-            <p>Overall, Salesforce is a comprehensive and flexible platform that can help businesses of all sizes grow and succeed by improving their customer relationships and streamlining their operations.</p>
-          </div>
+          <a href="/contact-us" className="service-cta-btn reveal">
+            Get in touch &rarr;
+          </a>
         </div>
 
         {/* Sidebar */}
